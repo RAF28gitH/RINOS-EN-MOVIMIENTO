@@ -11,9 +11,9 @@ CREATE TABLE cascos(
     Precio_aprox VARCHAR(50) NOT NULL,
     Imagen BLOB NOT NULL,
     Fecha_registro DATE NOT NULL
-);
+) ENGINE = InnoDB;
 
-CREATE TABLE Incidentes(
+CREATE TABLE accidentes(
 	id INT AUTO_INCREMENT PRIMARY KEY,
     fecha VARCHAR (50) NOT NULL,
     lugar VARCHAR (50) NOT NULL,
@@ -22,14 +22,14 @@ CREATE TABLE Incidentes(
     lesionados VARCHAR (50) NOT NULL,
     uso_casco VARCHAR (50) NOT NULL,
     nivel_gravedad VARCHAR (50) NOT NULL,
-    evidencia blob NOT NULL
-);
+    evidencia BLOB NOT NULL
+) ENGINE = InnoDB;
 
-CREATE TABLE Preguntas_Frecuentes(
+CREATE TABLE preguntas_frecuentes(
 	id INT AUTO_INCREMENT PRIMARY KEY,
     pregunta VARCHAR (50) NOT NULL,
     respuesta VARCHAR (50) NOT NULL,
     categoria VARCHAR (50) NOT NULL,
     orden VARCHAR (50) NOT NULL
-);
+)  ENGINE = InnoDB;
 
