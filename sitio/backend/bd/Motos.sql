@@ -12,3 +12,24 @@ CREATE TABLE cascos(
     Imagen BLOB NOT NULL,
     Fecha_registro DATE NOT NULL
 );
+
+CREATE TABLE Incidentes(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    fecha VARCHAR (50) NOT NULL,
+    lugar VARCHAR (50) NOT NULL,
+    descripcion VARCHAR (50) NOT NULL,
+    causa VARCHAR (50) NOT NULL,
+    lesionados VARCHAR (50) NOT NULL,
+    uso_casco VARCHAR (50) NOT NULL,
+    nivel_gravedad VARCHAR (50) NOT NULL,
+    evidencia blob NOT NULL
+);
+
+CREATE TABLE Preguntas_Frecuentes(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    pregunta VARCHAR (50) NOT NULL,
+    respuesta VARCHAR (50) NOT NULL,
+    categoria VARCHAR (50) NOT NULL,
+    orden VARCHAR (50) NOT NULL
+);
+
