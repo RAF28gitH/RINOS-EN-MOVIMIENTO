@@ -1,9 +1,32 @@
 .principal{
+    color: rgb(240, 235, 235);
     background-color: rgb(135, 71, 90);
     min-height: 100vh;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.principal div{
+    margin: 3%;
 }
 
 .header{
     background-color: rgb(103, 37, 51);
     padding: 2% 6%;
+}
+
+.header section{
+    margin: auto 0;
+}
+
+.header h1{
+    color: rgb(236, 202, 108);
+}
+
+.navvv{
+    padding: 1%;
+    background-color: rgb(45, 45, 46);
+}
+
+.p{
+    background-color: rgb(18, 21, 51);
 }
