@@ -53,6 +53,12 @@
     margin: 3rem auto 0;
 }
 
+.borde-accordion{
+    padding: 1px 0;
+    background-color: #383c6e;
+    border-radius: 30px;
+}
+
 .accordion-item{
     --bs-accordion-bg: #616492;
     --bs-accordion-btn-bg: #383c6e;
@@ -61,4 +67,10 @@
     --bs-accordion-border-color: #0d0f72;
     --bs-accordion-active-bg: #383c6e;
     --bs-accordion-active-color: #06001f;
+}
+
+.accordion-button:hover {
+    background-color: #4b508a;
+    color: #ffffff;
+    transition: background-color 0.3s ease;
 }
