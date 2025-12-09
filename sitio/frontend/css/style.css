@@ -52,3 +52,13 @@
     width: 28rem;
     margin: 3rem auto 0;
 }
+
+.accordion-item{
+    --bs-accordion-bg: #616492;
+    --bs-accordion-btn-bg: #383c6e;
+    --bs-accordion-btn-color: #06001f;
+    --bs-accordion-color: #06001f;
+    --bs-accordion-border-color: #0d0f72;
+    --bs-accordion-active-bg: #383c6e;
+    --bs-accordion-active-color: #06001f;
+}
