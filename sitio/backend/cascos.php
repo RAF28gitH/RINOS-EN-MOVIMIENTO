@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rinos En Movimiento</title>
+    <title>Tipos De Cascos</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -11,7 +11,7 @@
     <div class="principal d-flex flex-column">
         <header class="header d-flex flex-row justify-content-between">
             <section>
-                <h1 class="text">Rinos En Movimiento</h1>
+                <h1 class="text">Tipos De Cascos</h1>
             </section>
             <section>
                 <img src="https://cbtis217.edu.mx/recursos/img/logo.png" alt="CBTis217">
@@ -20,13 +20,13 @@
         <nav class="navvv p">
             <ul class="nav nav-pills justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                    <a class="nav-link" href="inicio.html">Inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="practicas-seguras.html">Prácticas Seguras</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../backend/cascos.php">Tipos De Casco</a>
+                    <a class="nav-link active" aria-current="page" href="#">Tipos De Casco</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Iniciar Sesión</a>
@@ -35,22 +35,10 @@
         </nav>
         <div>
             <div class="recuadro-page d-flex justify-content-center">
-                <h2 class="text">RINOS EN MOVIMIENTO: RESPONSABILIDAD SOBRE RUEDAS</h2>
+                <h2 class="text">CASCOS</h2>
             </div>
             <section class="d-flex justify-content-center">
-                <div class="card p" style="width: 36rem;">
-                    <img src="https://www.motofichas.com.mx/images/articulos/motos-deportivas-baja-cilindrada-mas-potentes/motos-baja-cilindrada-mas-potentes-mexico.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h3 class="text">Objetivo</h3>
-                        <p class="card-text text">
-                            El objetivo de este proyecto es que los jóvenes conozcan los
-                            riesgos de conducir en una moto sin tomar todas las precauciones,
-                            conozcan los riesgos, las certificaciones, diferentes tipos de
-                            cascos y las diversas reglas y normativas sobre esto, así como
-                            conocer de buenas prácticas para conducir más seguros.
-                        </p>
-                    </div>
-                </div>
+                <!--Aquí irá la tabla de cascos-->
             </section>
         </div>
         <footer class="footer p">

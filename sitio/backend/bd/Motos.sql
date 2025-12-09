@@ -14,7 +14,7 @@ CREATE TABLE cascos(
 ) ENGINE = InnoDB;
 
 CREATE TABLE accidentes(
-	id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     fecha VARCHAR (50) NOT NULL,
     lugar VARCHAR (50) NOT NULL,
     descripcion VARCHAR (50) NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE accidentes(
 ) ENGINE = InnoDB;
 
 CREATE TABLE preguntas_frecuentes(
-	id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     pregunta VARCHAR (50) NOT NULL,
     respuesta VARCHAR (50) NOT NULL,
     categoria VARCHAR (50) NOT NULL,
