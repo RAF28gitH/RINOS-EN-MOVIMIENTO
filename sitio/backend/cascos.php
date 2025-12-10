@@ -14,7 +14,7 @@
                 <h1 class="text">Tipos De Cascos</h1>
             </section>
             <section>
-                <img src="https://cbtis217.edu.mx/recursos/img/logo.png" alt="CBTis217">
+                <img src="../frontend/img/logo.png" alt="CBTis217">
             </section>
         </header>
         <nav class="navvv p">
