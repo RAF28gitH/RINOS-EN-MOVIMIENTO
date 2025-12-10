@@ -24,10 +24,12 @@ $resultado = $conexion->query($sql);
 <body>
 
     <h2>Accidentes en Motocicleta</h2>
-    <p>los accidentes en motócicleta son una causa importantede lesiones y muertes viales,<br>
-    con mayor riesgo para las motócicletas por falta de protección.<br>
-    para prevenirlos es importante: usar protección, cumplir normas,darle servicio a la motócicleta</p>
-
+    <p>
+        los accidentes en motócicleta son una causa importantede lesiones y muertes viales,<br>
+        con mayor riesgo para las motócicletas por falta de protección.<br>
+        para prevenirlos es importante: usar protección, cumplir normas,darle servicio a la motócicleta
+    </p>
+    
     <table>
         <tr>
             <th>ID</th>
