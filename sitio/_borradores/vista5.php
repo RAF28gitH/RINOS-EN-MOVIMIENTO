@@ -1,6 +1,6 @@
 <?php
 
-$conexion = new mysqli("localhost", "root", "", "tu_base_de_datos");
+$conexion = new mysqli("localhost", "root", "", "motos");
 
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
@@ -39,7 +39,7 @@ $resultado = $conexion->query($sql);
         </tr>
 
         <?php
-        // ==== 3. MOSTRAR REGISTROS ====
+        
         if ($resultado->num_rows > 0) {
             while($fila = $resultado->fetch_assoc()) {
                 echo "<tr>";
