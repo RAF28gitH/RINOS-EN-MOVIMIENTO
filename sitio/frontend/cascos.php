@@ -14,7 +14,7 @@
                 <h1 class="text">Tipos De Cascos</h1>
             </section>
             <section>
-                <img src="../frontend/img/logo.png" alt="CBTis217">
+                <img src="img/logo.png" alt="CBTis217">
             </section>
         </header>
         <nav class="navvv p">
@@ -26,7 +26,13 @@
                     <a class="nav-link" href="practicas-seguras.html">Prácticas Seguras</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Tipos De Casco</a>
+                    <a class="nav-link active" aria-current="page" href="">Tipos De Casco</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contacto-compromiso.html">Contacto / Compromiso</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="normativa-reglamento.html">Normativa y Reglamento</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Iniciar Sesión</a>
