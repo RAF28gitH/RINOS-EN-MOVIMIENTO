@@ -1,3 +1,16 @@
+<?php
+
+$conexion = new mysqli("localhost", "root", "", "motos");
+
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
+}
+
+$sql = "SELECT * FROM cascos";
+
+$resultado = $conexion->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,6 +46,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="normativa-reglamento.html">Normativa y Reglamento</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="accidentes.php">Accidentes Viales</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="FAQ.php">Preguntas Frecuentes</a>
