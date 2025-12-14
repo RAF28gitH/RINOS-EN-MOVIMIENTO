@@ -1,17 +1,31 @@
+<?php
+
+$conexion = new mysqli("localhost", "root", "", "motos");
+
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
+}
+
+$sql = "SELECT * FROM accidentes";
+
+$resultado = $conexion->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Normativa y Reglamento Vial</title>
+    <title>Accidentes en Motocicleta</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <div class="principal d-flex flex-column">
         <header class="header d-flex flex-row justify-content-between">
             <section>
-                <h1 class="text">Normativa y Reglamento Vial</h1>
+                <h1 class="text">Accidentes</h1>
             </section>
             <section>
                 <img src="img/logo.png" alt="CBTis217">
@@ -20,7 +34,7 @@
         <nav class="navvv p">
             <ul class="nav nav-pills justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link" href="inicio.html">Inicio</a>
+                    <a class="nav-link active" aria-current="page" href="">Inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="practicas-seguras.html">Prácticas Seguras</a>
@@ -32,10 +46,7 @@
                     <a class="nav-link" href="contacto-compromiso.html">Contacto / Compromiso</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="">Normativa y Reglamento</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="accidentes.php">Accidentes Viales</a>
+                    <a class="nav-link" href="normativa-reglamento.html">Normativa y Reglamento</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="FAQ.php">Preguntas Frecuentes</a>
@@ -47,49 +58,51 @@
         </nav>
         <div>
             <div class="recuadro-page d-flex justify-content-center">
-                <h2 class="text">NORMATIVA Y REGLAMENTO</h2>
+                <h2 class="text">ACCIDENTES EN MOTOCICLETA</h2>
             </div>
             <section class="d-flex flex-column justify-content-center">
-                <!--Contenido-->
-                <h2 class="text">Obligaciones de los Conductores</h2>
-                <p class="text">
-                    Respetar la preferencia de paso de peatones y ciclistas, especialmente en cruces y semáforos.
-                    Disminuir la velocidad ante transporte escolar detenido o en zonas escolares.
-                    Portar la documentación reglamentaria (licencia/permiso, tarjeta de circulación, placas).
-                    Contar con equipos de seguridad (cinturones, claxon, luces).
+                <p>
+                    Los accidentes en motocicleta son una causa importante de lesiones y muertes viales,<br>
+                    con mayor riesgo para las motocicletas por falta de protección.<br>
+                    para prevenirlos es importante: usar protección, cumplir normas y darle servicio a la motocicleta.
                 </p>
-                <br>
+                
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <th>Lugar</th>
+                        <th>Descripcion</th>
+                        <th>Causa</th>
+                        <th>Lecionados</th>
+                        <th>Uso_casco</th>
+                        <th>Nivel_gravedad</th>
+                        <th>Evidencia</th>
+                    </tr>
 
-                <h2 class="text">Prohibiciones Comunes</h2>
-                <p class="text">
-                    No usar el celular al conducir, exceder los límites de velocidad, invadir carriles exclusivos, 
-                    circular en sentido contrario, remolcar vehículos sin grúa (salvo excepciones).
-                </p>
-                <br>
+                    <?php
+                    
+                    if ($resultado->num_rows > 0) {
+                        while($fila = $resultado->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . $fila['id'] . "</td>";
+                            echo "<td>" . $fila['fecha'] . "</td>";
+                            echo "<td>" . $fila['lugar'] . "</td>";
+                            echo "<td>" . $fila['descripcion'] . "</td>";
+                            echo "<td>" . $fila['causa'] . "</td>";
+                            echo "<td>" . $fila['lesionados'] . "</td>";
+                            echo "<td>" . $fila['uso_casco'] . "</td>";
+                            echo "<td>" . $fila['nivel_gravedad'] . "</td>";
+                            echo "<td>" . $fila['evidencia'] . "</td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='9' style='text-align:center'>No hay registros</td></tr>";
+                    }
 
-                <h2 class="text">Jerarquía de la Movilidad</h2> 
-                <p class="text">
-                    La ley prioriza a los usuarios más vulnerables:
-                    Peatones (incluyendo personas con discapacidad y menores de edad).
-                    Usuarios de vehículos no motorizados (bicicletas).
-                    Usuarios y prestadores de transporte público.
-                    Usuarios de transporte particular (automóviles, motocicletas).
-                </p>
-                <br>
-
-                <h2 class="text">Obligaciones de los Peatones</h2>
-                <p class="text">
-                    Circular por las aceras.
-                    Cruzar por las esquinas, pasos peatonales o puentes.
-                    No cruzar entre vehículos o invadir la superficie de rodamiento intempestivamente.
-                </p>
-                <br>
-
-                <h2 class="text">Señalamiento Vial</h2>
-                <p class="text">
-                    Conductores y peatones deben obedecer las indicaciones de las señales 
-                    (preventivas, restrictivas, informativas) y las marcas en el pavimento.
-                </p>
+                    $conexion->close();
+                    ?>
+                </table>
             </section>
         </div>
         <footer class="footer p">
