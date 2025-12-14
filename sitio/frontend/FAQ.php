@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tipos De Cascos</title>
+    <title>FAQ</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -11,7 +11,7 @@
     <div class="principal d-flex flex-column">
         <header class="header d-flex flex-row justify-content-between">
             <section>
-                <h1 class="text">Tipos De Cascos</h1>
+                <h1 class="text">Preguntas Frecuentes</h1>
             </section>
             <section>
                 <img src="img/logo.png" alt="CBTis217">
@@ -26,7 +26,7 @@
                     <a class="nav-link" href="practicas-seguras.html">Prácticas Seguras</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="">Tipos De Casco</a>
+                    <a class="nav-link" href="cascos.php">Tipos De Casco</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="contacto-compromiso.html">Contacto / Compromiso</a>
@@ -35,7 +35,7 @@
                     <a class="nav-link" href="normativa-reglamento.html">Normativa y Reglamento</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="FAQ.php">Preguntas Frecuentes</a>
+                    <a class="nav-link active" aria-current="page" href="">Preguntas Frecuentes</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Iniciar Sesión</a>
@@ -44,10 +44,12 @@
         </nav>
         <div>
             <div class="recuadro-page d-flex justify-content-center">
-                <h2 class="text">CASCOS</h2>
+                <h2 class="text">PREGUNTAS FRECUENTES (FAQ)</h2>
             </div>
             <section class="d-flex justify-content-center">
-                <!--Aquí irá la tabla de cascos-->
+                <!--Contenido-->
+                
+                
             </section>
         </div>
         <footer class="footer p">
@@ -55,22 +57,22 @@
             <div class="borde-accordion">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        <strong class="text">Integrantes</strong>
-                        </button>
-                    </h2>
-                    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body text">
-                            <ul>
-                                <li><strong>JUAN RAFAEL GONZÁLEZ DÍAZ</strong></li>
-                                <li><strong>DAVID ALMANZA LÓPEZ</strong></li>
-                                <li><strong>DANA CAMILA NIETO OROZCO</strong></li>
-                                <li><strong>MICHELLE ROMERO ÁVILA</strong></li>
-                                <li><strong>JOCELIN ROCHA GARNICA</strong></li>
-                            </ul>
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            <strong class="text">Integrantes</strong>
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body text">
+                                <ul>
+                                    <li><strong>JUAN RAFAEL GONZÁLEZ DÍAZ</strong></li>
+                                    <li><strong>DAVID ALMANZA LÓPEZ</strong></li>
+                                    <li><strong>DANA CAMILA NIETO OROZCO</strong></li>
+                                    <li><strong>MICHELLE ROMERO ÁVILA</strong></li>
+                                    <li><strong>JOCELIN ROCHA GARNICA</strong></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
