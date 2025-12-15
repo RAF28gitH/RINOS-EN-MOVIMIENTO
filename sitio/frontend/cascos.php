@@ -54,7 +54,7 @@ $resultado = $conexion->query($sql);
                     <a class="nav-link" href="FAQ.php">Preguntas Frecuentes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Iniciar Sesión</a>
+                    <a class="nav-link" href="usuario/loging.php">Iniciar Sesión</a>
                 </li>
             </ul>
         </nav>
