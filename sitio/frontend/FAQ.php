@@ -54,7 +54,7 @@ $resultado = $conexion->query($sql);
                     <a class="nav-link active" aria-current="page" href="">Preguntas Frecuentes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="usuario/loging.php">Iniciar Sesión</a>
+                    <a class="nav-link" href="usuario/login.php">Iniciar Sesión</a>
                 </li>
             </ul>
         </nav>
@@ -63,9 +63,40 @@ $resultado = $conexion->query($sql);
                 <h2 class="text">PREGUNTAS FRECUENTES (FAQ)</h2>
             </div>
             <section class="d-flex justify-content-center">
-                <!--Contenido-->
-                
-                
+                <div class="container my-4 faq-info">
+                    <div class="accordion" id="accordionFAQ">
+                        <?php
+                        if ($resultado->num_rows > 0) {
+                            $contador = 0;
+                            while($fila = $resultado->fetch_assoc()) {
+                                $contador++;
+                                $idHeading = "heading" . $fila['id'];
+                                $idCollapse = "collapse" . $fila['id'];
+                        ?>
+                                <div class="accordion-item mb-3 shadow-sm border-0">
+                                    <h2 class="accordion-header" id="<?php echo $idHeading; ?>">
+                                        <button class="accordion-button collapsed fw-bold text" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $idCollapse; ?>" aria-expanded="false" aria-controls="<?php echo $idCollapse; ?>" style="background-color: #f8f9fa;">
+                                            <?php echo $fila['pregunta']; ?>
+                                        </button>
+                                    </h2>
+                                    <div id="<?php echo $idCollapse; ?>" class="accordion-collapse collapse" aria-labelledby="<?php echo $idHeading; ?>" data-bs-parent="#accordionFAQ">
+                                        <div class="accordion-body text">
+                                            <?php echo $fila['respuesta']; ?>
+                                            <div class="mt-2 text-end">
+                                                <small class="text-muted">Categoría: <?php echo $fila['categoria']; ?></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        <?php
+                            }
+                        } else {
+                            echo "<p class='text-center'>No hay preguntas frecuentes registradas.</p>";
+                        }
+                        $conexion->close();
+                        ?>
+                    </div>
+                </div>
             </section>
         </div>
         <footer class="footer p">

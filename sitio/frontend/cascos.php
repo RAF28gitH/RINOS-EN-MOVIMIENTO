@@ -54,7 +54,7 @@ $resultado = $conexion->query($sql);
                     <a class="nav-link" href="FAQ.php">Preguntas Frecuentes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="usuario/loging.php">Iniciar Sesión</a>
+                    <a class="nav-link" href="usuario/login.php">Iniciar Sesión</a>
                 </li>
             </ul>
         </nav>
@@ -63,7 +63,52 @@ $resultado = $conexion->query($sql);
                 <h2 class="text">CASCOS</h2>
             </div>
             <section class="d-flex justify-content-center">
-                <!--Aquí irá la tabla de cascos-->
+                <div class="container my-4 cascos-info">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                        
+                        <?php
+                        if ($resultado->num_rows > 0) {
+                            while($fila = $resultado->fetch_assoc()) {
+                        ?>
+                            <div class="col">
+                                <div class="card h-100 p shadow-sm">
+                                    
+                                    <?php if($fila['Imagen']): ?>
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($fila['Imagen']); ?>" class="card-img-top" alt="Casco" style="height: 250px; object-fit: cover;">
+                                    <?php else: ?>
+                                        <img src="img/logo.png" class="card-img-top p-5" alt="Sin imagen" style="height: 250px; object-fit: contain;">
+                                    <?php endif; ?>
+
+                                    <div class="card-body d-flex flex-column">
+                                        <h3 class="text card-title text-center">
+                                            <?php echo $fila['Marca'] . " " . $fila['Modelo']; ?>
+                                        </h3>
+                                        
+                                        <div class="text-center mb-3">
+                                            <span class="badge bg-primary"><?php echo $fila['Tipo']; ?></span>
+                                            <span class="badge bg-warning text-dark"><?php echo $fila['Certificacion']; ?></span>
+                                        </div>
+
+                                        <p class="card-text text" style="text-align: justify;">
+                                            <?php echo $fila['Descripcion']; ?>
+                                        </p>
+                                        
+                                        <div class="mt-auto pt-3 text-center border-top">
+                                            <strong class="text fs-4">$<?php echo $fila['Precio_aprox']; ?></strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                        <?php
+                            }
+                        }
+                        else{
+                            echo "<h3 class='text-center w-100'>No hay cascos registrados aún.</h3>";
+                        }
+                        $conexion->close();
+                        ?>
+                    </div>
+                </div>
             </section>
         </div>
         <footer class="footer p">

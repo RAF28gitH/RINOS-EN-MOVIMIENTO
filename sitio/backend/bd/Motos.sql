@@ -32,4 +32,3 @@ CREATE TABLE preguntas_frecuentes(
     categoria VARCHAR (50) NOT NULL,
     orden VARCHAR (50) NOT NULL
 )  ENGINE = InnoDB;
-
