@@ -34,7 +34,7 @@ $resultado = $conexion->query($sql);
         <nav class="navvv p">
             <ul class="nav nav-pills justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="">Inicio</a>
+                    <a class="nav-link" href="inicio.html">Inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="practicas-seguras.html">Prácticas Seguras</a>
@@ -49,10 +49,13 @@ $resultado = $conexion->query($sql);
                     <a class="nav-link" href="normativa-reglamento.html">Normativa y Reglamento</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="">Accidentes Viales</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="FAQ.php">Preguntas Frecuentes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="usuario/loging.php">Iniciar Sesión</a>
+                    <a class="nav-link" href="usuario/login.php">Iniciar Sesión</a>
                 </li>
             </ul>
         </nav>
@@ -61,20 +64,19 @@ $resultado = $conexion->query($sql);
                 <h2 class="text">ACCIDENTES EN MOTOCICLETA</h2>
             </div>
             <section class="d-flex flex-column justify-content-center">
-                <p>
-                    Los accidentes en motocicleta son una causa importante de lesiones y muertes viales,<br>
-                    con mayor riesgo para las motocicletas por falta de protección.<br>
+                <h4 class="text">
+                    Los accidentes en motocicleta son una causa importante de lesiones y muertes viales,
+                    con mayor riesgo para las motocicletas por falta de protección.
                     para prevenirlos es importante: usar protección, cumplir normas y darle servicio a la motocicleta.
-                </p>
+                </h4>
                 
-                <table>
-                    <tr>
-                        <th>ID</th>
+                <table class="tabla-motos">
+                    <tr class="text">
                         <th>Fecha</th>
                         <th>Lugar</th>
                         <th>Descripcion</th>
                         <th>Causa</th>
-                        <th>Lecionados</th>
+                        <th>Lesionados</th>
                         <th>Uso_casco</th>
                         <th>Nivel_gravedad</th>
                         <th>Evidencia</th>
@@ -82,10 +84,9 @@ $resultado = $conexion->query($sql);
 
                     <?php
                     
-                    if ($resultado->num_rows > 0) {
-                        while($fila = $resultado->fetch_assoc()) {
+                    if($resultado->num_rows > 0){
+                        while($fila = $resultado->fetch_assoc()){
                             echo "<tr>";
-                            echo "<td>" . $fila['id'] . "</td>";
                             echo "<td>" . $fila['fecha'] . "</td>";
                             echo "<td>" . $fila['lugar'] . "</td>";
                             echo "<td>" . $fila['descripcion'] . "</td>";
@@ -96,8 +97,9 @@ $resultado = $conexion->query($sql);
                             echo "<td>" . $fila['evidencia'] . "</td>";
                             echo "</tr>";
                         }
-                    } else {
-                        echo "<tr><td colspan='9' style='text-align:center'>No hay registros</td></tr>";
+                    }
+                    else{
+                        echo "<tr><td class='text-center' colspan='8'>No hay registros</td></tr>";
                     }
 
                     $conexion->close();

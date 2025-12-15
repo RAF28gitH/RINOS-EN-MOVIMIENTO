@@ -155,3 +155,59 @@
 .linkss a h3 {
     margin: auto;
 }
+
+table{
+    margin-top: 5rem;
+}
+
+.tabla-motos {
+    width: 100%;
+    border-collapse: collapse; 
+    margin: 25px 0;
+    font-size: 16px;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); 
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    background-color: white;
+}
+
+.tabla-motos tr:first-child {
+    background-color: rgb(1, 53, 152);
+    font-weight: bold;
+}
+
+.tabla-motos th, .tabla-motos td {
+    padding: 12px 15px;
+}
+
+.tabla-motos td {
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+.tabla-motos tr:nth-of-type(even) {
+    background-color: rgb(243, 243, 243);
+}
+
+.tabla-motos tr:last-of-type {
+    border-bottom: 2px solid rgb(1, 53, 152);
+}
+
+.tabla-motos tr:hover {
+    color: rgb(1, 53, 152);
+    background-color: rgb(234, 246, 244);
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.cascos-info{
+    border-radius: 60px;
+    padding: 3rem;
+}
+
+.faq-info{
+    border-radius: 50px;
+    padding: 2rem;
+    max-width: 800px;
+}
