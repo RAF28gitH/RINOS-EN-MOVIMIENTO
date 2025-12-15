@@ -25,8 +25,11 @@
                 <div class="login-container mt-4">
                     <?php
                     session_start();
+                    require_once 'configdatabase.php';
+                    
                     $error = '';
                     $success = '';
+                    
                     if (isset($_SESSION['error'])) {
                         $error = $_SESSION['error'];
                         unset($_SESSION['error']);
@@ -36,22 +39,33 @@
                         $success = $_SESSION['success'];
                         unset($_SESSION['success']);
                     }
+                    
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $username = $_POST['username'] ?? '';
                         $password = $_POST['password'] ?? '';
+                        
                         if (empty($username) || empty($password)) {
                             $error = "Por favor, completa todos los campos";
                         } else {
-                            $valid_username = "admin";
-                            $valid_password = "password123";
-                            
-                            if ($username === $valid_username && $password === $valid_password) {
-                                $_SESSION['username'] = $username;
-                                $_SESSION['logged_in'] = true;
-                                header('Location: dashboard.php');
-                                exit();
-                            } else {
-                                $error = "Usuario o contraseña incorrectos";
+                            try {
+                                $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE username = :username");
+                                $stmt->execute(['username' => $username]);
+                                $user = $stmt->fetch();
+                                
+                                if ($user && password_verify($password, $user['pass'])) {
+                                    $_SESSION['user_id'] = $user['id'];
+                                    $_SESSION['username'] = $user['username'];
+                                    $_SESSION['rol'] = $user['rol'];
+                                    $_SESSION['fname'] = $user['fname'];
+                                    $_SESSION['logged_in'] = true;
+                                    
+                                    header('Location: dashboard.php');
+                                    exit();
+                                } else {
+                                    $error = "Usuario o contraseña incorrectos";
+                                }
+                            } catch(PDOException $e) {
+                                $error = "Error al iniciar sesión: " . $e->getMessage();
                             }
                         }
                     }
@@ -93,6 +107,7 @@
                         <button type="submit" class="btn btn-login">Iniciar Sesión</button>
                         
                         <div class="text-center mt-3">
+                            <a href="registro.php" class="text-decoration-none">¿No tienes cuenta? Regístrate aquí</a><br>
                             <a href="#" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
                         </div>
                     </form>
