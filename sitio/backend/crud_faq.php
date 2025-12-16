@@ -2,21 +2,20 @@
 session_start();
 require_once '../frontend/usuario/configdatabase.php';
 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') { die("Acceso denegado."); }
+if(!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin'){ die("Acceso denegado."); }
 
 $accion = $_GET['accion'] ?? 'listar';
 
-switch ($accion) {
+switch ($accion){
     case 'guardar':
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
             $id = $_POST['id'] ?? '';
-            // Asumiendo tabla: id, pregunta, respuesta, categoria
             $datos = [$_POST['pregunta'], $_POST['respuesta'], $_POST['categoria']];
 
-            if (!empty($id)) {
+            if(!empty($id)){
                 $sql = "UPDATE preguntas_frecuentes SET pregunta=?, respuesta=?, categoria=? WHERE id=?";
                 $datos[] = $id; 
-            } else {
+            } else{
                 $sql = "INSERT INTO preguntas_frecuentes (pregunta, respuesta, categoria) VALUES (?, ?, ?)";
             }
             
@@ -27,7 +26,7 @@ switch ($accion) {
         break;
 
     case 'eliminar':
-        if (isset($_GET['id'])) {
+        if(isset($_GET['id'])){
             $pdo->prepare("DELETE FROM preguntas_frecuentes WHERE id=?")->execute([$_GET['id']]);
             header("Location: crud_faq.php"); exit();
         }
@@ -36,7 +35,7 @@ switch ($accion) {
     case 'formulario':
         $reg = ['id'=>'', 'pregunta'=>'', 'respuesta'=>'', 'categoria'=>''];
         $titulo_form = "Nueva Pregunta";
-        if (isset($_GET['id'])) {
+        if(isset($_GET['id'])){
             $stmt = $pdo->prepare("SELECT * FROM preguntas_frecuentes WHERE id=?");
             $stmt->execute([$_GET['id']]);
             $reg = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -65,7 +64,7 @@ switch ($accion) {
     <div class="container mt-4">
         <a href="../frontend/usuario/dashboard.php" class="btn btn-secondary mb-3">⬅ Volver al Dashboard</a>
         
-        <?php if ($accion == 'formulario'): ?>
+        <?php if($accion == 'formulario'): ?>
             <div class="card p-4 shadow border-success">
                 <h3 class="text-success"><?php echo $titulo_form; ?></h3>
                 <form action="crud_faq.php?accion=guardar" method="POST">
@@ -100,7 +99,7 @@ switch ($accion) {
                     <tbody>
                         <?php
                         $stmt = $pdo->query("SELECT * FROM preguntas_frecuentes");
-                        while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        while($fila = $stmt->fetch(PDO::FETCH_ASSOC)){
                             echo "<tr>";
                             echo "<td>" . htmlspecialchars($fila['pregunta']) . "</td>";
                             echo "<td><span class='badge bg-secondary'>" . htmlspecialchars($fila['categoria']) . "</span></td>";

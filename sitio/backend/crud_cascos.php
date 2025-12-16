@@ -2,16 +2,13 @@
 session_start();
 require_once '../frontend/usuario/configdatabase.php';
 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') { 
+if(!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin'){ 
     die("Acceso denegado."); 
 }
-
 $accion = $_GET['accion'] ?? 'listar';
 $mensaje = "";
-
-// Verificar mensajes de éxito
-if (isset($_GET['mensaje'])) {
-    switch ($_GET['mensaje']) {
+if(isset($_GET['mensaje'])){
+    switch ($_GET['mensaje']){
         case 'ok':
             $mensaje = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
                         Casco guardado correctamente
@@ -27,9 +24,9 @@ if (isset($_GET['mensaje'])) {
     }
 }
 
-switch ($accion) {
+switch ($accion){
     case 'guardar':
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
             $id = $_POST['id'] ?? '';
             $marca = $_POST['marca'];
             $modelo = $_POST['modelo'];
@@ -37,28 +34,21 @@ switch ($accion) {
             $certificacion = $_POST['certificacion'];
             $descripcion = $_POST['descripcion'];
             $precio_aprox = $_POST['precio_aprox'];
-            
-            // Manejo de la imagen
             $imagen_data = $_POST['imagen_actual'] ?? '';
-            
-            // Si se sube una nueva imagen
-            if (isset($_FILES['archivo_imagen']) && $_FILES['archivo_imagen']['error'] === UPLOAD_ERR_OK) {
-                // Leer la imagen como base64
+            if(isset($_FILES['archivo_imagen']) && $_FILES['archivo_imagen']['error'] === UPLOAD_ERR_OK){
                 $imagen_tmp = $_FILES['archivo_imagen']['tmp_name'];
                 $imagen_contenido = file_get_contents($imagen_tmp);
                 $imagen_data = base64_encode($imagen_contenido);
-            } elseif (empty($imagen_data) && empty($id)) {
-                // Imagen por defecto si es nuevo y no subió imagen
+            } elseif(empty($imagen_data) && empty($id)){
                 $default_image_path = '../frontend/img/default-helmet.png';
-                if (file_exists($default_image_path)) {
+                if(file_exists($default_image_path)){
                     $imagen_contenido = file_get_contents($default_image_path);
                     $imagen_data = base64_encode($imagen_contenido);
                 }
             }
 
-            try {
-                if (!empty($id)) {
-                    // Actualizar casco existente
+            try{
+                if(!empty($id)){
                     $sql = "UPDATE cascos SET 
                             Marca = ?, 
                             Modelo = ?, 
@@ -73,8 +63,7 @@ switch ($accion) {
                         $marca, $modelo, $tipo, $certificacion, 
                         $descripcion, $precio_aprox, $imagen_data, $id
                     ]);
-                } else {
-                    // Insertar nuevo casco
+                } else{
                     $sql = "INSERT INTO cascos (Marca, Modelo, Tipo, Certificacion, Descripcion, Precio_aprox, Imagen, Fecha_registro) 
                             VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
                     $stmt = $pdo->prepare($sql);
@@ -85,7 +74,7 @@ switch ($accion) {
                 }
                 header("Location: crud_cascos.php?mensaje=ok");
                 exit();
-            } catch (PDOException $e) {
+            } catch (PDOException $e){
                 $mensaje = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                             Error al guardar: " . $e->getMessage() . "
                             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
@@ -95,13 +84,13 @@ switch ($accion) {
         break;
 
     case 'eliminar':
-        if (isset($_GET['id'])) {
-            try {
+        if(isset($_GET['id'])){
+            try{
                 $stmt = $pdo->prepare("DELETE FROM cascos WHERE id = ?");
                 $stmt->execute([$_GET['id']]);
                 header("Location: crud_cascos.php?mensaje=eliminado");
                 exit();
-            } catch (PDOException $e) {
+            } catch (PDOException $e){
                 $mensaje = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                             Error al eliminar: " . $e->getMessage() . "
                             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
@@ -111,7 +100,6 @@ switch ($accion) {
         break;
 
     case 'formulario':
-        // Datos por defecto para nuevo registro
         $reg = [
             'id' => '',
             'Marca' => '',
@@ -123,19 +111,17 @@ switch ($accion) {
             'Imagen' => ''
         ];
         $titulo_form = "Registrar Nuevo Casco";
-        
-        // Si estamos editando, cargar los datos existentes
-        if (isset($_GET['id'])) {
-            try {
+        if(isset($_GET['id'])){
+            try{
                 $stmt = $pdo->prepare("SELECT * FROM cascos WHERE id = ?");
                 $stmt->execute([$_GET['id']]);
                 $reg = $stmt->fetch(PDO::FETCH_ASSOC);
-                if ($reg) {
+                if($reg){
                     $titulo_form = "Editar Casco";
-                } else {
+                } else{
                     $mensaje = "<div class='alert alert-warning'>Casco no encontrado</div>";
                 }
-            } catch (PDOException $e) {
+            } catch (PDOException $e){
                 $mensaje = "<div class='alert alert-danger'>Error: " . $e->getMessage() . "</div>";
             }
         }
@@ -150,32 +136,32 @@ switch ($accion) {
     <link rel="stylesheet" href="../frontend/css/bootstrap.min.css">
     <link rel="stylesheet" href="../frontend/css/style.css">
     <style>
-        body {
+        body{
             background-color: #f8f9fa;
             font-family: Arial, sans-serif;
         }
-        .header {
+        .header{
             background: linear-gradient(135deg, #0dcaf0 0%, #0da2c4 100%);
             color: white;
             padding: 20px;
             border-radius: 0 0 10px 10px;
         }
-        .btn-info {
+        .btn-info{
             background-color: #0dcaf0;
             border-color: #0dcaf0;
         }
-        .btn-info:hover {
+        .btn-info:hover{
             background-color: #0da2c4;
             border-color: #0da2c4;
         }
-        .table th {
+        .table th{
             background-color: #0dcaf0;
             color: white;
         }
-        .card {
+        .card{
             border: 2px solid #0dcaf0;
         }
-        .img-preview {
+        .img-preview{
             max-width: 200px;
             max-height: 200px;
             object-fit: cover;
@@ -197,19 +183,15 @@ switch ($accion) {
     </header>
 
     <div class="container mt-4">
-        <!-- Mensajes de confirmación -->
         <?php echo $mensaje; ?>
-        
-        <!-- Botón volver -->
         <a href="../frontend/usuario/dashboard.php" class="btn btn-secondary mb-3">
             ← Volver al Dashboard
         </a>
 
-        <?php if ($accion == 'formulario'): ?>
-            <!-- FORMULARIO DE REGISTRO/EDICIÓN -->
+        <?php if($accion == 'formulario'): ?>
             <div class="card p-4 shadow-lg">
                 <h3 class="mb-4 text-center text-info"><?php echo $titulo_form; ?></h3>
-                
+
                 <form action="crud_cascos.php?accion=guardar" method="POST" enctype="multipart/form-data" onsubmit="return validarFormulario()">
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($reg['id']); ?>">
                     <input type="hidden" name="imagen_actual" value="<?php echo htmlspecialchars($reg['Imagen']); ?>">
@@ -265,17 +247,14 @@ switch ($accion) {
                                    placeholder="Ej: 2,500.00">
                         </div>
                     </div>
-                    
                     <div class="mb-3">
                         <label class="form-label fw-bold">Imagen del Casco:</label>
                         <input type="file" name="archivo_imagen" class="form-control" 
                                accept="image/*" 
                                onchange="previewImage(this)">
                         <small class="text-muted">Formatos permitidos: JPG, PNG, GIF. Tamaño máximo: 2MB</small>
-                        
-                        <!-- Vista previa de imagen -->
                         <div id="imagePreview" class="mt-3">
-                            <?php if (!empty($reg['Imagen'])): ?>
+                            <?php if(!empty($reg['Imagen'])): ?>
                                 <p class="mb-2">Imagen actual:</p>
                                 <img src="data:image/jpeg;base64,<?php echo $reg['Imagen']; ?>" 
                                      class="img-preview" 
@@ -303,7 +282,6 @@ switch ($accion) {
             </div>
 
         <?php else: ?>
-            <!-- LISTA DE CASCOS -->
             <div class="card shadow-lg border-0">
                 <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
                     <h2 class="mb-0">🛡️ Catálogo de Cascos</h2>
@@ -328,11 +306,11 @@ switch ($accion) {
                             </thead>
                             <tbody>
                                 <?php
-                                try {
+                                try{
                                     $stmt = $pdo->query("SELECT * FROM cascos ORDER BY Marca, Modelo");
                                     $total = 0;
                                     
-                                    while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)){
                                         $total++;
                                         $imagen_src = !empty($fila['Imagen']) 
                                             ? "data:image/jpeg;base64," . $fila['Imagen'] 
@@ -359,10 +337,10 @@ switch ($accion) {
                                         echo "</tr>";
                                     }
                                     
-                                    if ($total == 0) {
+                                    if($total == 0){
                                         echo "<tr><td colspan='7' class='text-center text-muted py-4'>No hay cascos registrados</td></tr>";
                                     }
-                                } catch (PDOException $e) {
+                                } catch (PDOException $e){
                                     echo "<tr><td colspan='7' class='text-center text-danger py-4'>Error al cargar los datos: " . $e->getMessage() . "</td></tr>";
                                 }
                                 ?>
@@ -370,7 +348,7 @@ switch ($accion) {
                         </table>
                     </div>
                     
-                    <?php if (isset($total) && $total > 0): ?>
+                    <?php if(isset($total) && $total > 0): ?>
                         <div class="mt-3 text-end">
                             <span class="badge bg-secondary">Total: <?php echo $total; ?> cascos</span>
                         </div>
@@ -382,14 +360,14 @@ switch ($accion) {
 
     <script src="../frontend/js/bootstrap.bundle.min.js"></script>
     <script>
-        function previewImage(input) {
+        function previewImage(input){
             const preview = document.getElementById('imagePreview');
             preview.innerHTML = '';
             
-            if (input.files && input.files[0]) {
+            if(input.files && input.files[0]){
                 const reader = new FileReader();
                 
-                reader.onload = function(e) {
+                reader.onload = function(e){
                     const img = document.createElement('img');
                     img.src = e.target.result;
                     img.className = 'img-preview';
@@ -407,28 +385,28 @@ switch ($accion) {
             }
         }
         
-        function validarFormulario() {
+        function validarFormulario(){
             const marca = document.querySelector('input[name="marca"]').value.trim();
             const modelo = document.querySelector('input[name="modelo"]').value.trim();
             const precio = document.querySelector('input[name="precio_aprox"]').value.trim();
             const descripcion = document.querySelector('textarea[name="descripcion"]').value.trim();
             
-            if (marca === '') {
+            if(marca === ''){
                 alert('Por favor ingrese la marca del casco');
                 return false;
             }
             
-            if (modelo === '') {
+            if(modelo === ''){
                 alert('Por favor ingrese el modelo del casco');
                 return false;
             }
             
-            if (precio === '') {
+            if(precio === ''){
                 alert('Por favor ingrese el precio aproximado');
                 return false;
             }
             
-            if (descripcion === '') {
+            if(descripcion === ''){
                 alert('Por favor ingrese una descripción del casco');
                 return false;
             }

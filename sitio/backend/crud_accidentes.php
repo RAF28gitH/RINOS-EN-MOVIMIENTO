@@ -2,14 +2,14 @@
 session_start();
 require_once '../frontend/usuario/configdatabase.php';
 
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
+if(!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin'){
     die("Acceso denegado.");
 }
 
 $accion = $_GET['accion'] ?? 'listar';
 $mensaje = "";
-if (isset($_GET['mensaje'])) {
-    switch ($_GET['mensaje']) {
+if(isset($_GET['mensaje'])){
+    switch ($_GET['mensaje']){
         case 'ok':
             $mensaje = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
                         Accidente guardado correctamente
@@ -25,9 +25,9 @@ if (isset($_GET['mensaje'])) {
     }
 }
 
-switch ($accion) {
+switch ($accion){
     case 'guardar':
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
             $id = $_POST['id'] ?? '';
             $fecha = $_POST['fecha'];
             $lugar = $_POST['lugar'];
@@ -39,8 +39,8 @@ switch ($accion) {
             $evidencia = $_POST['evidencia'];
             $uso_casco_bool = ($uso_casco === 'Sí') ? 1 : 0;
 
-            try {
-                if (!empty($id)) {
+            try{
+                if(!empty($id)){
                     $sql = "UPDATE accidentes SET 
                             fecha = ?, 
                             lugar = ?, 
@@ -57,7 +57,7 @@ switch ($accion) {
                         $lesionados, $uso_casco_bool, $nivel_gravedad, $evidencia, $id
                     ]);
                 }
-                else {
+                else{
                     $sql = "INSERT INTO accidentes (fecha, lugar, descripcion, causa, lesionados, uso_casco, nivel_gravedad, evidencia) 
                             VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                     $stmt = $pdo->prepare($sql);
@@ -68,7 +68,7 @@ switch ($accion) {
                 }
                 header("Location: crud_accidentes.php?mensaje=ok");
                 exit();
-            } catch (PDOException $e) {
+            } catch (PDOException $e){
                 $mensaje = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                             Error al guardar: " . $e->getMessage() . "
                             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
@@ -78,13 +78,13 @@ switch ($accion) {
         break;
 
     case 'eliminar':
-        if (isset($_GET['id'])) {
-            try {
+        if(isset($_GET['id'])){
+            try{
                 $stmt = $pdo->prepare("DELETE FROM accidentes WHERE id = ?");
                 $stmt->execute([$_GET['id']]);
                 header("Location: crud_accidentes.php?mensaje=eliminado");
                 exit();
-            } catch (PDOException $e) {
+            } catch (PDOException $e){
                 $mensaje = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
                             Error al eliminar: " . $e->getMessage() . "
                             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
@@ -106,19 +106,19 @@ switch ($accion) {
             'evidencia' => ''
         ];
         $titulo_form = "Registrar Nuevo Accidente";
-        if (isset($_GET['id'])) {
-            try {
+        if(isset($_GET['id'])){
+            try{
                 $stmt = $pdo->prepare("SELECT * FROM accidentes WHERE id = ?");
                 $stmt->execute([$_GET['id']]);
                 $reg = $stmt->fetch(PDO::FETCH_ASSOC);
-                if ($reg) {
+                if($reg){
                     $titulo_form = "Editar Accidente";
                     $reg['uso_casco_text'] = ($reg['uso_casco'] == 1) ? 'Sí' : 'No';
                 }
-                else {
+                else{
                     $mensaje = "<div class='alert alert-warning'>Accidente no encontrado</div>";
                 }
-            } catch (PDOException $e) {
+            } catch (PDOException $e){
                 $mensaje = "<div class='alert alert-danger'>Error: " . $e->getMessage() . "</div>";
             }
         }
@@ -134,28 +134,28 @@ switch ($accion) {
     <link rel="stylesheet" href="../frontend/css/bootstrap.min.css">
     <link rel="stylesheet" href="../frontend/css/style.css">
     <style>
-        body {
+        body{
             background-color: #f8f9fa;
             font-family: Arial, sans-serif;
         }
-        .card {
+        .card{
             border-radius: 10px;
             border: 1px solid #ddd;
         }
-        .btn-warning {
+        .btn-warning{
             background-color: #ffc107;
             border-color: #ffc107;
             color: #212529;
         }
-        .btn-warning:hover {
+        .btn-warning:hover{
             background-color: #e0a800;
             border-color: #d39e00;
         }
-        .table th {
+        .table th{
             background-color: #ffc107;
             color: #212529;
         }
-        .header {
+        .header{
             background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
             padding: 20px;
             color: white;
@@ -180,7 +180,7 @@ switch ($accion) {
             ← Volver al Dashboard
         </a>
 
-        <?php if ($accion == 'formulario'): ?>
+        <?php if($accion == 'formulario'): ?>
             <div class="card p-4 shadow-lg">
                 <h3 class="mb-4 text-center"><?php echo $titulo_form; ?></h3>
                 
@@ -292,11 +292,11 @@ switch ($accion) {
                             </thead>
                             <tbody>
                                 <?php
-                                try {
+                                try{
                                     $stmt = $pdo->query("SELECT * FROM accidentes ORDER BY fecha DESC, id DESC");
                                     $total = 0;
                                     
-                                    while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)){
                                         $total++;
                                         $uso_casco_text = ($fila['uso_casco'] == 1) ? 'Sí' : 'No';
                                         $uso_casco_color = ($fila['uso_casco'] == 1) ? 'success' : 'danger';
@@ -308,7 +308,7 @@ switch ($accion) {
                                         echo "<td><span class='badge bg-danger'>" . $fila['lesionados'] . "</span></td>";
                                         echo "<td><span class='badge bg-$uso_casco_color'>$uso_casco_text</span></td>";
                                         $color = '';
-                                        switch ($fila['nivel_gravedad']) {
+                                        switch ($fila['nivel_gravedad']){
                                             case 'Leve': $color = 'bg-success'; break;
                                             case 'Moderado': $color = 'bg-warning'; break;
                                             case 'Grave': $color = 'bg-danger'; break;
@@ -325,10 +325,10 @@ switch ($accion) {
                                         echo "</tr>";
                                     }
                                     
-                                    if ($total == 0) {
+                                    if($total == 0){
                                         echo "<tr><td colspan='7' class='text-center text-muted py-4'>No hay accidentes registrados</td></tr>";
                                     }
-                                } catch (PDOException $e) {
+                                } catch (PDOException $e){
                                     echo "<tr><td colspan='7' class='text-center text-danger py-4'>Error al cargar los datos: " . $e->getMessage() . "</td></tr>";
                                 }
                                 ?>
@@ -336,7 +336,7 @@ switch ($accion) {
                         </table>
                     </div>
                     
-                    <?php if (isset($total) && $total > 0): ?>
+                    <?php if(isset($total) && $total > 0): ?>
                         <div class="mt-3 text-end">
                             <span class="badge bg-secondary">Total: <?php echo $total; ?> accidentes</span>
                         </div>
@@ -348,7 +348,7 @@ switch ($accion) {
 
     <script src="../frontend/js/bootstrap.bundle.min.js"></script>
     <script>
-        function validarFormulario() {
+        function validarFormulario(){
             const fecha = document.querySelector('input[name="fecha"]').value;
             const lugar = document.querySelector('input[name="lugar"]').value.trim();
             const causa = document.querySelector('input[name="causa"]').value.trim();
@@ -356,41 +356,41 @@ switch ($accion) {
             const descripcion = document.querySelector('textarea[name="descripcion"]').value.trim();
             const evidencia = document.querySelector('input[name="evidencia"]').value.trim();
             
-            if (fecha === '') {
+            if(fecha === ''){
                 alert('Por favor seleccione una fecha');
                 return false;
             }
             
-            if (lugar === '') {
+            if(lugar === ''){
                 alert('Por favor ingrese el lugar del accidente');
                 return false;
             }
             
-            if (causa === '') {
+            if(causa === ''){
                 alert('Por favor ingrese la causa del accidente');
                 return false;
             }
             
-            if (lesionados === '' || lesionados < 0) {
+            if(lesionados === '' || lesionados < 0){
                 alert('Por favor ingrese un número válido de lesionados (0 o más)');
                 return false;
             }
             
-            if (descripcion === '') {
+            if(descripcion === ''){
                 alert('Por favor ingrese una descripción del accidente');
                 return false;
             }
             
-            if (evidencia === '') {
+            if(evidencia === ''){
                 alert('Por favor ingrese la evidencia o URL');
                 return false;
             }
             
             return true;
         }
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function(){
             const fechaInput = document.querySelector('input[name="fecha"]');
-            if (fechaInput) {
+            if(fechaInput){
                 const hoy = new Date().toISOString().split('T')[0];
                 fechaInput.max = hoy;
             }

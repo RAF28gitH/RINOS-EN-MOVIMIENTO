@@ -71,7 +71,7 @@
     --bs-accordion-active-color: rgb(6, 0, 31);
 }
 
-.accordion-button:hover {
+.accordion-button:hover{
     background-color: rgb(75, 80, 138);
     color: white;
     transition: background-color 0.3s ease;
@@ -103,7 +103,7 @@
     overflow: hidden;
 }
 
-.linkss::before {
+.linkss::before{
     content: "";
     position: absolute;
     top: 0;
@@ -115,11 +115,11 @@
     z-index: 0;
 }
 
-.linkss:hover::before {
+.linkss:hover::before{
     width: 100%;
 }
 
-.linkss > * {
+.linkss > *{
     position: relative;
     z-index: 1;
 }
@@ -145,7 +145,7 @@
     transition: color 0.4s ease, font-size 0.4s ease;
 }
 
-.linkss a img {
+.linkss a img{
     height: 25rem;
     border: 4px solid rgb(47, 77, 97);
     border-radius: 50px;
@@ -153,7 +153,7 @@
     display: block;
 }
 
-.linkss a h3 {
+.linkss a h3{
     margin: auto;
 }
 
@@ -161,7 +161,7 @@ table{
     margin-top: 5rem;
 }
 
-.tabla-motos {
+.tabla-motos{
     width: 100%;
     border-collapse: collapse; 
     margin: 25px 0;
@@ -173,28 +173,28 @@ table{
     background-color: white;
 }
 
-.tabla-motos tr:first-child {
+.tabla-motos tr:first-child{
     background-color: rgb(1, 53, 152);
     font-weight: bold;
 }
 
-.tabla-motos th, .tabla-motos td {
+.tabla-motos th, .tabla-motos td{
     padding: 12px 15px;
 }
 
-.tabla-motos td {
+.tabla-motos td{
     border-bottom: 1px solid rgb(221, 221, 221);
 }
 
-.tabla-motos tr:nth-of-type(even) {
+.tabla-motos tr:nth-of-type(even){
     background-color: rgb(243, 243, 243);
 }
 
-.tabla-motos tr:last-of-type {
+.tabla-motos tr:last-of-type{
     border-bottom: 2px solid rgb(1, 53, 152);
 }
 
-.tabla-motos tr:hover {
+.tabla-motos tr:hover{
     color: rgb(1, 53, 152);
     background-color: rgb(234, 246, 244);
     cursor: pointer;
@@ -213,13 +213,13 @@ table{
     max-width: 800px;
 }
 
-.dashboard-container {
+.dashboard-container{
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.welcome-message {
+.welcome-message{
     background: linear-gradient(135deg, #4a6fa5, #2c4d7c);
     color: white;
     padding: 30px;
@@ -228,7 +228,7 @@ table{
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.btn-logout {
+.btn-logout{
     background-color: #dc3545;
     color: white;
     border: none;
@@ -238,13 +238,13 @@ table{
     transition: all 0.3s ease;
 }
 
-.btn-logout:hover {
+.btn-logout:hover{
     background-color: #c82333;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
 }
 
-.table-container {
+.table-container{
     background: white;
     border-radius: 10px;
     padding: 20px;
@@ -252,24 +252,24 @@ table{
     margin-top: 30px;
 }
 
-.role-badge {
+.role-badge{
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 0.8em;
     font-weight: bold;
 }
 
-.role-admin {
+.role-admin{
     background-color: #dc3545;
     color: white;
 }
 
-.role-user {
+.role-user{
     background-color: #28a745;
     color: white;
 }
 
-.user-info-card {
+.user-info-card{
     background: white;
     border-radius: 10px;
     padding: 25px;
@@ -277,7 +277,7 @@ table{
     margin-top: 20px;
 }
 
-.registration-container {
+.registration-container{
     max-width: 500px;
     width: 100%;
     background: white;
