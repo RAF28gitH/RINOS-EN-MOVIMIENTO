@@ -1,10 +1,11 @@
 <?php
 require_once 'usuario/configdatabase.php';
 
-try {
+try{
     $stmt = $pdo->query("SELECT * FROM cascos ORDER BY Fecha_registro DESC");
     $cascos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
+}
+catch(PDOException $e){
     $error = "Error al cargar los cascos. Por favor intente más tarde.";
     $cascos = [];
 }
@@ -19,12 +20,12 @@ try {
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .principal {
+        .principal{
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
-        .recuadro-page {
+        .recuadro-page{
             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
             color: white;
             padding: 30px;
@@ -33,7 +34,7 @@ try {
             text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .tabla-motos {
+        .tabla-motos{
             width: 100%;
             background: white;
             border-radius: 10px;
@@ -41,32 +42,32 @@ try {
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
             margin: 30px 0;
         }
-        .tabla-motos th {
+        .tabla-motos th{
             background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
             color: white;
             padding: 15px;
             text-align: center;
             font-weight: bold;
         }
-        .tabla-motos td {
+        .tabla-motos td{
             padding: 12px 15px;
             border-bottom: 1px solid #dee2e6;
             vertical-align: middle;
         }
-        .tabla-motos tr:hover {
+        .tabla-motos tr:hover{
             background-color: #f8f9fa;
         }
-        .badge-gravedad {
+        .badge-gravedad{
             padding: 5px 10px;
             border-radius: 20px;
             font-size: 0.85em;
             font-weight: bold;
         }
-        .badge-leve { background-color: #28a745; color: white; }
-        .badge-moderado { background-color: #ffc107; color: #212529; }
-        .badge-grave { background-color: #fd7e14; color: white; }
-        .badge-fatal { background-color: #dc3545; color: white; }
-        .info-box {
+        .badge-leve{ background-color: #28a745; color: white; }
+        .badge-moderado{ background-color: #ffc107; color: #212529; }
+        .badge-grave{ background-color: #fd7e14; color: white; }
+        .badge-fatal{ background-color: #dc3545; color: white; }
+        .info-box{
             background: white;
             padding: 20px;
             border-radius: 10px;
@@ -74,7 +75,7 @@ try {
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             border-left: 4px solid #dc3545;
         }
-        .stats-box {
+        .stats-box{
             background: white;
             border-radius: 10px;
             padding: 20px;
@@ -129,33 +130,33 @@ try {
             
             <section class="d-flex justify-content-center py-4">
                 <div class="container my-4 cascos-info">
-                    <?php if (isset($error)): ?>
+                    <?php if(isset($error)): ?>
                         <div class="alert alert-danger text-center"><?php echo $error; ?></div>
                     <?php endif; ?>
                     
-                    <?php if (empty($cascos)): ?>
+                    <?php if(empty($cascos)): ?>
                         <div class="alert alert-info text-center py-5">
                             <h4>📭 No hay cascos registrados</h4>
                             <p class="mb-0">Actualmente no hay información disponible sobre cascos.</p>
                         </div>
                     <?php else: ?>
                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                            <?php foreach ($cascos as $casco): ?>
+                            <?php foreach($cascos as $casco): ?>
                                 <?php
                                 $imagen_src = '';
-                                if (!empty($casco['Imagen'])) {
-                                    if (strpos($casco['Imagen'], 'data:image') === 0 || 
-                                        preg_match('/^[a-zA-Z0-9\/+]+={0,2}$/', $casco['Imagen'])) {
+                                if(!empty($casco['Imagen'])){
+                                    if(strpos($casco['Imagen'], 'data:image') === 0 || 
+                                        preg_match('/^[a-zA-Z0-9\/+]+={0,2}$/', $casco['Imagen'])){
                                         $imagen_src = "data:image/jpeg;base64," . $casco['Imagen'];
                                     }
-                                    else {
+                                    else{
                                         $imagen_src = htmlspecialchars($casco['Imagen']);
-                                        if (!file_exists($imagen_src) && !filter_var($imagen_src, FILTER_VALIDATE_URL)) {
+                                        if(!file_exists($imagen_src) && !filter_var($imagen_src, FILTER_VALIDATE_URL)){
                                             $imagen_src = "img/default-helmet.png";
                                         }
                                     }
                                 }
-                                else {
+                                else{
                                     $imagen_src = "img/default-helmet.png";
                                 }
                                 ?>

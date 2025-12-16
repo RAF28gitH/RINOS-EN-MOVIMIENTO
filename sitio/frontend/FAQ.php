@@ -2,7 +2,7 @@
 
 $conexion = new mysqli("localhost", "root", "", "motos");
 
-if ($conexion->connect_error) {
+if($conexion->connect_error){
     die("Error de conexión: " . $conexion->connect_error);
 }
 
@@ -66,9 +66,9 @@ $resultado = $conexion->query($sql);
                 <div class="container my-4 faq-info">
                     <div class="accordion" id="accordionFAQ">
                         <?php
-                        if ($resultado->num_rows > 0) {
+                        if($resultado->num_rows > 0){
                             $contador = 0;
-                            while($fila = $resultado->fetch_assoc()) {
+                            while($fila = $resultado->fetch_assoc()){
                                 $contador++;
                                 $idHeading = "heading" . $fila['id'];
                                 $idCollapse = "collapse" . $fila['id'];
@@ -91,7 +91,7 @@ $resultado = $conexion->query($sql);
                         <?php
                             }
                         }
-                        else {
+                        else{
                             echo "<p class='text-center'>No hay preguntas frecuentes registradas.</p>";
                         }
                         $conexion->close();

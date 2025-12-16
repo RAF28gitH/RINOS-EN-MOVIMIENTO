@@ -1,10 +1,11 @@
 <?php
 require_once 'usuario/configdatabase.php';
 
-try {
+try{
     $stmt = $pdo->query("SELECT * FROM accidentes ORDER BY fecha DESC, id DESC");
     $accidentes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
+}
+catch(PDOException $e){
     $error = "Error al cargar los accidentes. Por favor intente más tarde.";
     $accidentes = [];
 }
@@ -19,12 +20,12 @@ try {
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .principal {
+        .principal{
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
-        .recuadro-page {
+        .recuadro-page{
             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
             color: white;
             padding: 30px;
@@ -33,7 +34,7 @@ try {
             text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .tabla-motos {
+        .tabla-motos{
             width: 100%;
             background: white;
             border-radius: 10px;
@@ -41,32 +42,32 @@ try {
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
             margin: 30px 0;
         }
-        .tabla-motos th {
+        .tabla-motos th{
             background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
             color: white;
             padding: 15px;
             text-align: center;
             font-weight: bold;
         }
-        .tabla-motos td {
+        .tabla-motos td{
             padding: 12px 15px;
             border-bottom: 1px solid #dee2e6;
             vertical-align: middle;
         }
-        .tabla-motos tr:hover {
+        .tabla-motos tr:hover{
             background-color: #f8f9fa;
         }
-        .badge-gravedad {
+        .badge-gravedad{
             padding: 5px 10px;
             border-radius: 20px;
             font-size: 0.85em;
             font-weight: bold;
         }
-        .badge-leve { background-color: #28a745; color: white; }
-        .badge-moderado { background-color: #ffc107; color: #212529; }
-        .badge-grave { background-color: #fd7e14; color: white; }
-        .badge-fatal { background-color: #dc3545; color: white; }
-        .info-box {
+        .badge-leve{ background-color: #28a745; color: white; }
+        .badge-moderado{ background-color: #ffc107; color: #212529; }
+        .badge-grave{ background-color: #fd7e14; color: white; }
+        .badge-fatal{ background-color: #dc3545; color: white; }
+        .info-box{
             background: white;
             padding: 20px;
             border-radius: 10px;
@@ -74,7 +75,7 @@ try {
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             border-left: 4px solid #dc3545;
         }
-        .stats-box {
+        .stats-box{
             background: white;
             border-radius: 10px;
             padding: 20px;
@@ -176,7 +177,7 @@ try {
                 <div class="alert alert-danger"><?php echo $error; ?></div>
             <?php endif; ?>
             
-            <?php if (empty($accidentes)): ?>
+            <?php if(empty($accidentes)): ?>
                 <div class="alert alert-info text-center py-4">
                     <h4>📭 No hay accidentes registrados</h4>
                     <p class="mb-0">Actualmente no hay reportes de accidentes en el sistema.</p>
@@ -186,7 +187,7 @@ try {
                 $total_accidentes = count($accidentes);
                 $total_lesionados = array_sum(array_column($accidentes, 'lesionados'));
                 $con_casco = 0;
-                foreach ($accidentes as $acc) {
+                foreach($accidentes as $acc){
                     if ($acc['uso_casco'] == 1) {
                         $con_casco++;
                     }
@@ -235,13 +236,13 @@ try {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($accidentes as $accidente): ?>
+                            <?php foreach($accidentes as $accidente): ?>
                                 <?php
                                 $uso_casco_text = ($accidente['uso_casco'] == 1) ? 'Sí' : 'No';
                                 $uso_casco_color = ($accidente['uso_casco'] == 1) ? 'success' : 'danger';
                                 
                                 $clase_gravedad = '';
-                                switch ($accidente['nivel_gravedad']) {
+                                switch($accidente['nivel_gravedad']){
                                     case 'Leve': $clase_gravedad = 'badge-leve'; break;
                                     case 'Moderado': $clase_gravedad = 'badge-moderado'; break;
                                     case 'Grave': $clase_gravedad = 'badge-grave'; break;
@@ -254,7 +255,7 @@ try {
                                     <td><?php echo nl2br(htmlspecialchars($accidente['description'])); ?></td>
                                     <td><?php echo htmlspecialchars($accidente['causa']); ?></td>
                                     <td class="text-center">
-                                        <?php if ($accidente['lesionados'] > 0): ?>
+                                        <?php if($accidente['lesionados'] > 0): ?>
                                             <span class="badge bg-danger"><?php echo $accidente['lesionados']; ?> personas</span>
                                         <?php else: ?>
                                             <span class="badge bg-secondary">0</span>

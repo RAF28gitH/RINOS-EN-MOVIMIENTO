@@ -5,33 +5,33 @@ require_once 'configdatabase.php';
 $error = '';
 $success = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
     $email = $_POST['email'] ?? '';
     $fname = $_POST['fname'] ?? '';
-    if (empty($username) || empty($password) || empty($confirm_password) || empty($email) || empty($fname)) {
+    if (empty($username) || empty($password) || empty($confirm_password) || empty($email) || empty($fname)){
         $error = "Todos los campos son obligatorios";
     }
-    elseif (strlen($username) > 28) {
+    elseif (strlen($username) > 28){
         $error = "El nombre de usuario no puede exceder 28 caracteres";
     }
-    elseif ($password !== $confirm_password) {
+    elseif ($password !== $confirm_password){
         $error = "Las contraseñas no coinciden";
     }
-    elseif (strlen($password) < 6) {
+    elseif (strlen($password) < 6){
         $error = "La contraseña debe tener al menos 6 caracteres";
     }
-    else {
-        try {
+    else{
+        try{
             $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE username = :username OR email = :email");
             $stmt->execute(['username' => $username, 'email' => $email]);
             
-            if ($stmt->fetch()) {
+            if ($stmt->fetch()){
                 $error = "El usuario o email ya están registrados";
             }
-            else {
+            else{
                 $hashed_password = password_hash($password, PASSWORD_BCRYPT);
                 $stmt = $pdo->prepare("INSERT INTO usuarios (username, pass, email, fname, rol) 
                                       VALUES (:username, :pass, :email, :fname, 'user')");
@@ -46,7 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Location: login.php');
                 exit();
             }
-        } catch(PDOException $e) {
+        }
+        catch(PDOException $e){
             $error = "Error al registrar: " . $e->getMessage();
         }
     }
