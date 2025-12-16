@@ -15,10 +15,12 @@ try {
             foreach ($usuarios as $usuario) {
                 echo "- {$usuario['username']} ({$usuario['rol']}) - Pass length: {$usuario['pass_length']}<br>";
             }
-        } else {
+        }
+        else {
             echo "❌ No hay usuarios en la tabla<br>";
         }
-    } else {
+    }
+    else {
         echo "❌ Tabla 'usuarios' NO existe<br>";
     }
 } catch(PDOException $e) {

@@ -13,20 +13,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fname = $_POST['fname'] ?? '';
     if (empty($username) || empty($password) || empty($confirm_password) || empty($email) || empty($fname)) {
         $error = "Todos los campos son obligatorios";
-    } elseif (strlen($username) > 28) {
+    }
+    elseif (strlen($username) > 28) {
         $error = "El nombre de usuario no puede exceder 28 caracteres";
-    } elseif ($password !== $confirm_password) {
+    }
+    elseif ($password !== $confirm_password) {
         $error = "Las contraseñas no coinciden";
-    } elseif (strlen($password) < 6) {
+    }
+    elseif (strlen($password) < 6) {
         $error = "La contraseña debe tener al menos 6 caracteres";
-    } else {
+    }
+    else {
         try {
             $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE username = :username OR email = :email");
             $stmt->execute(['username' => $username, 'email' => $email]);
             
             if ($stmt->fetch()) {
                 $error = "El usuario o email ya están registrados";
-            } else {
+            }
+            else {
                 $hashed_password = password_hash($password, PASSWORD_BCRYPT);
                 $stmt = $pdo->prepare("INSERT INTO usuarios (username, pass, email, fname, rol) 
                                       VALUES (:username, :pass, :email, :fname, 'user')");

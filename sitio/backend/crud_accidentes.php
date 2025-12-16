@@ -8,8 +8,6 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
 
 $accion = $_GET['accion'] ?? 'listar';
 $mensaje = "";
-
-// Verificar mensajes de éxito
 if (isset($_GET['mensaje'])) {
     switch ($_GET['mensaje']) {
         case 'ok':
@@ -39,13 +37,10 @@ switch ($accion) {
             $uso_casco = $_POST['uso_casco'];
             $nivel_gravedad = $_POST['nivel_gravedad'];
             $evidencia = $_POST['evidencia'];
-
-            // Convertir uso_casco a booleano (1=Sí, 0=No)
             $uso_casco_bool = ($uso_casco === 'Sí') ? 1 : 0;
 
             try {
                 if (!empty($id)) {
-                    // Actualizar accidente existente
                     $sql = "UPDATE accidentes SET 
                             fecha = ?, 
                             lugar = ?, 
@@ -61,8 +56,8 @@ switch ($accion) {
                         $fecha, $lugar, $descripcion, $causa,
                         $lesionados, $uso_casco_bool, $nivel_gravedad, $evidencia, $id
                     ]);
-                } else {
-                    // Insertar nuevo accidente
+                }
+                else {
                     $sql = "INSERT INTO accidentes (fecha, lugar, descripcion, causa, lesionados, uso_casco, nivel_gravedad, evidencia) 
                             VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                     $stmt = $pdo->prepare($sql);
@@ -99,7 +94,6 @@ switch ($accion) {
         break;
 
     case 'formulario':
-        // Datos por defecto para nuevo registro
         $reg = [
             'id' => '',
             'fecha' => date('Y-m-d'),
@@ -112,8 +106,6 @@ switch ($accion) {
             'evidencia' => ''
         ];
         $titulo_form = "Registrar Nuevo Accidente";
-        
-        // Si estamos editando, cargar los datos existentes
         if (isset($_GET['id'])) {
             try {
                 $stmt = $pdo->prepare("SELECT * FROM accidentes WHERE id = ?");
@@ -121,9 +113,9 @@ switch ($accion) {
                 $reg = $stmt->fetch(PDO::FETCH_ASSOC);
                 if ($reg) {
                     $titulo_form = "Editar Accidente";
-                    // Convertir booleano a texto para el formulario
                     $reg['uso_casco_text'] = ($reg['uso_casco'] == 1) ? 'Sí' : 'No';
-                } else {
+                }
+                else {
                     $mensaje = "<div class='alert alert-warning'>Accidente no encontrado</div>";
                 }
             } catch (PDOException $e) {
@@ -183,16 +175,12 @@ switch ($accion) {
     </header>
 
     <div class="container mt-4">
-        <!-- Mensajes de confirmación -->
         <?php echo $mensaje; ?>
-        
-        <!-- Botón volver -->
         <a href="../frontend/usuario/dashboard.php" class="btn btn-secondary mb-3">
             ← Volver al Dashboard
         </a>
 
         <?php if ($accion == 'formulario'): ?>
-            <!-- FORMULARIO DE REGISTRO/EDICIÓN -->
             <div class="card p-4 shadow-lg">
                 <h3 class="mb-4 text-center"><?php echo $titulo_form; ?></h3>
                 
@@ -280,7 +268,6 @@ switch ($accion) {
             </div>
 
         <?php else: ?>
-            <!-- LISTA DE ACCIDENTES -->
             <div class="card shadow-lg border-0">
                 <div class="card-header bg-warning d-flex justify-content-between align-items-center">
                     <h2 class="mb-0">📋 Registro de Accidentes</h2>
@@ -320,8 +307,6 @@ switch ($accion) {
                                         echo "<td>" . htmlspecialchars($fila['causa']) . "</td>";
                                         echo "<td><span class='badge bg-danger'>" . $fila['lesionados'] . "</span></td>";
                                         echo "<td><span class='badge bg-$uso_casco_color'>$uso_casco_text</span></td>";
-                                        
-                                        // Color según gravedad
                                         $color = '';
                                         switch ($fila['nivel_gravedad']) {
                                             case 'Leve': $color = 'bg-success'; break;
@@ -403,8 +388,6 @@ switch ($accion) {
             
             return true;
         }
-        
-        // Configurar fecha máxima como hoy
         document.addEventListener('DOMContentLoaded', function() {
             const fechaInput = document.querySelector('input[name="fecha"]');
             if (fechaInput) {

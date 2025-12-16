@@ -122,15 +122,11 @@ try {
             </ul>
         </nav>
 
-        <!-- CONTENIDO PRINCIPAL -->
         <main class="container py-4">
-            <!-- TÍTULO -->
             <div class="recuadro-page">
                 <h2 class="mb-3">🚨 ACCIDENTES EN MOTOCICLETA</h2>
                 <p class="lead mb-0">Registro de incidentes viales para concientización y prevención</p>
             </div>
-
-            <!-- INFORMACIÓN DE CONCIENTIZACIÓN -->
             <div class="info-box">
                 <h4 class="mb-3">📊 Estadísticas y Prevención</h4>
                 <p>Los accidentes en motocicleta representan una causa importante de lesiones y muertes viales. 
@@ -174,7 +170,6 @@ try {
                 </div>
             </div>
 
-            <!-- TABLA DE ACCIDENTES -->
             <h3 class="mb-4">📋 Registro de Accidentes Reportados</h3>
             
             <?php if (isset($error)): ?>
@@ -187,7 +182,6 @@ try {
                     <p class="mb-0">Actualmente no hay reportes de accidentes en el sistema.</p>
                 </div>
             <?php else: ?>
-                <!-- ESTADÍSTICAS -->
                 <?php
                 $total_accidentes = count($accidentes);
                 $total_lesionados = array_sum(array_column($accidentes, 'lesionados'));
@@ -226,8 +220,6 @@ try {
                         </div>
                     </div>
                 </div>
-                
-                <!-- TABLA -->
                 <div class="table-responsive">
                     <table class="tabla-motos">
                         <thead>
@@ -284,8 +276,6 @@ try {
                         </tbody>
                     </table>
                 </div>
-                
-                <!-- RESUMEN -->
                 <div class="alert alert-warning mt-4">
                     <h5>📌 Nota Importante:</h5>
                     <p class="mb-0">
@@ -296,8 +286,6 @@ try {
                 </div>
             <?php endif; ?>
         </main>
-
-        <!-- FOOTER -->
         <footer class="footer p">
             <h4 class="text">Página de CBTis217</h4>
             <div class="borde-accordion">
@@ -327,14 +315,7 @@ try {
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script>
-        // Actualizar año en el footer
         document.addEventListener('DOMContentLoaded', function() {
-            const yearSpan = document.querySelector('small');
-            if (yearSpan) {
-                yearSpan.textContent = yearSpan.textContent.replace('<?php echo date('Y'); ?>', new Date().getFullYear());
-            }
-            
-            // Agregar tooltips a los badges de gravedad
             const badges = document.querySelectorAll('.badge-gravedad');
             badges.forEach(badge => {
                 badge.title = 'Nivel de gravedad: ' + badge.textContent;

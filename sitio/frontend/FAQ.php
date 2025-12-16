@@ -90,7 +90,8 @@ $resultado = $conexion->query($sql);
                                 </div>
                         <?php
                             }
-                        } else {
+                        }
+                        else {
                             echo "<p class='text-center'>No hay preguntas frecuentes registradas.</p>";
                         }
                         $conexion->close();

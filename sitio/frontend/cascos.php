@@ -1,5 +1,4 @@
 <?php
-// Usar la misma conexión PDO que usas en accidentes
 require_once 'usuario/configdatabase.php';
 
 try {
@@ -143,23 +142,20 @@ try {
                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                             <?php foreach ($cascos as $casco): ?>
                                 <?php
-                                // Manejar la imagen (puede venir como base64 o como ruta)
                                 $imagen_src = '';
                                 if (!empty($casco['Imagen'])) {
-                                    // Verificar si es base64
                                     if (strpos($casco['Imagen'], 'data:image') === 0 || 
                                         preg_match('/^[a-zA-Z0-9\/+]+={0,2}$/', $casco['Imagen'])) {
-                                        // Es base64
                                         $imagen_src = "data:image/jpeg;base64," . $casco['Imagen'];
-                                    } else {
-                                        // Es una ruta de archivo
+                                    }
+                                    else {
                                         $imagen_src = htmlspecialchars($casco['Imagen']);
-                                        // Si es una ruta relativa, asegurarse de que sea accesible
                                         if (!file_exists($imagen_src) && !filter_var($imagen_src, FILTER_VALIDATE_URL)) {
                                             $imagen_src = "img/default-helmet.png";
                                         }
                                     }
-                                } else {
+                                }
+                                else {
                                     $imagen_src = "img/default-helmet.png";
                                 }
                                 ?>
@@ -239,14 +235,7 @@ try {
     
     <script src="js/bootstrap.bundle.min.js"></script>
     <script>
-        // Actualizar año en el footer
-        document.addEventListener('DOMContentLoaded', function() {
-            const yearElement = document.querySelector('footer small');
-            if (yearElement) {
-                yearElement.innerHTML = yearElement.innerHTML.replace('<?php echo date('Y'); ?>', new Date().getFullYear());
-            }
-            
-            // Mejorar experiencia de hover en móviles
+        document.addEventListener('DOMContentLoaded', function() {            
             const cards = document.querySelectorAll('.cascos-info .card');
             cards.forEach(card => {
                 card.addEventListener('touchstart', function() {

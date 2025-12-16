@@ -2,45 +2,48 @@
 session_start();
 require_once 'configdatabase.php';
 
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true){
     header('Location: login.php');
     exit();
 }
 
 $is_admin = ($_SESSION['rol'] === 'admin');
-if ($is_admin) {
-    try {
+if ($is_admin){
+    try{
         $stmt = $pdo->query("SELECT id, username, email, fname, rol FROM usuarios ORDER BY id ASC");
         $usuarios = $stmt->fetchAll();
-    } catch(PDOException $e) {
+    } catch(PDOException $e){
         $error_usuarios = "Error al cargar usuarios: " . $e->getMessage();
     }
 }
-if ($is_admin && isset($_POST['action'])) {
+if ($is_admin && isset($_POST['action'])){
     $user_id = $_POST['user_id'] ?? '';
     $action = $_POST['action'];
     
-    if ($action === 'delete' && $user_id) {
-        try {
+    if ($action === 'delete' && $user_id){
+        try{
             $stmt = $pdo->prepare("DELETE FROM usuarios WHERE id = :id AND rol != 'admin'");
             $stmt->execute(['id' => $user_id]);
             $_SESSION['success'] = "Usuario eliminado correctamente";
             header('Location: dashboard.php');
             exit();
-        } catch(PDOException $e) {
+        }
+        catch(PDOException $e){
             $_SESSION['error'] = "Error al eliminar usuario: " . $e->getMessage();
             header('Location: dashboard.php');
             exit();
         }
-    } elseif ($action === 'update_role' && $user_id) {
+    }
+    elseif ($action === 'update_role' && $user_id){
         $new_role = $_POST['rol'] ?? 'user';
-        try {
+        try{
             $stmt = $pdo->prepare("UPDATE usuarios SET rol = :rol WHERE id = :id");
             $stmt->execute(['rol' => $new_role, 'id' => $user_id]);
             $_SESSION['success'] = "Rol actualizado correctamente";
             header('Location: dashboard.php');
             exit();
-        } catch(PDOException $e) {
+        }
+        catch(PDOException $e){
             $_SESSION['error'] = "Error al actualizar rol: " . $e->getMessage();
             header('Location: dashboard.php');
             exit();
