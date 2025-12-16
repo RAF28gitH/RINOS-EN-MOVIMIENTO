@@ -238,7 +238,7 @@ if ($is_admin && isset($_POST['action'])){
             <?php endif; ?>
             
             <div class="text-center mt-5">
-                <a href="../inicio.html" class="btn btn-primary me-3" style="padding: 10px 30px; font-weight: 600;">
+                <a href="../inicio.php" class="btn btn-primary me-3" style="padding: 10px 30px; font-weight: 600;">
                     🏠 Volver al Sitio
                 </a>
                 <form method="POST" action="logout.php" class="d-inline">

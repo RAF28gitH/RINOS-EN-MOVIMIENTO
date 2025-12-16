@@ -97,19 +97,19 @@ catch(PDOException $e){
         <nav class="navvv p">
             <ul class="nav nav-pills justify-content-end" id="menu-navegacion">
                 <li class="nav-item">
-                    <a class="nav-link" href="inicio.html">Inicio</a>
+                    <a class="nav-link" href="inicio.php">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="practicas-seguras.html">Prácticas Seguras</a>
+                    <a class="nav-link" href="practicas-seguras.php">Prácticas Seguras</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="cascos.php">Tipos De Casco</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contacto-compromiso.html">Contacto / Compromiso</a>
+                    <a class="nav-link" href="contacto-compromiso.php">Contacto / Compromiso</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="normativa-reglamento.html">Normativa y Reglamento</a>
+                    <a class="nav-link" href="normativa-reglamento.php">Normativa y Reglamento</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="">Accidentes Viales</a>

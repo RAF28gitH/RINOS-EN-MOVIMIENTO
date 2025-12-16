@@ -23,16 +23,16 @@
                     <a class="nav-link active" aria-current="page" href="">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="practicas-seguras.html">Prácticas Seguras</a>
+                    <a class="nav-link" href="practicas-seguras.php">Prácticas Seguras</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="cascos.php">Tipos De Casco</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contacto-compromiso.html">Contacto / Compromiso</a>
+                    <a class="nav-link" href="contacto-compromiso.php">Contacto / Compromiso</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="normativa-reglamento.html">Normativa y Reglamento</a>
+                    <a class="nav-link" href="normativa-reglamento.php">Normativa y Reglamento</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="accidentes.php">Accidentes Viales</a>
@@ -68,7 +68,7 @@
                     <h2>¿Qué ver en este sitio?</h2>
                     <div class="container">
                         <div class="linkss">
-                            <a class="d-flex flex-column justify-content-center" href="practicas-seguras.html">
+                            <a class="d-flex flex-column justify-content-center" href="practicas-seguras.php">
                                 <div class="d-flex flex-column justify-content-center">
                                     <h3>Prácticas seguras de conducción.</h3>
                                     <img src="img/inicio/1.jpg" alt="">
@@ -84,7 +84,7 @@
                             </a>
                         </div>
                         <div class="linkss">
-                            <a class="d-flex flex-column justify-content-center" href="contacto-compromiso.html">
+                            <a class="d-flex flex-column justify-content-center" href="contacto-compromiso.php">
                                 <div class="d-flex flex-column justify-content-center">
                                     <h3>Compromiso de conducción segura y contacto.</h3>
                                     <img src="img/inicio/3.jpg" alt="">
@@ -92,7 +92,7 @@
                             </a>
                         </div>
                         <div class="linkss">
-                            <a class="d-flex flex-column justify-content-center" href="normativa-reglamento.html">
+                            <a class="d-flex flex-column justify-content-center" href="normativa-reglamento.php">
                                 <div class="d-flex flex-column justify-content-center">
                                     <h3>Normativa y reglamento vial.</h3>
                                     <img src="img/inicio/4.jpg" alt="">

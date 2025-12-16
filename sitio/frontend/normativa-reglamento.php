@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto / Compromiso De Conducción Segura</title>
+    <title>Normativa y Reglamento Vial</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -11,7 +11,7 @@
     <div class="principal d-flex flex-column">
         <header class="header d-flex flex-row justify-content-between">
             <section>
-                <h1 class="text">Contacto / Compromiso De Conducción Segura</h1>
+                <h1 class="text">Normativa y Reglamento Vial</h1>
             </section>
             <section>
                 <img src="img/logo.png" alt="CBTis217">
@@ -20,19 +20,19 @@
         <nav class="navvv p">
             <ul class="nav nav-pills justify-content-end" id="menu-navegacion">
                 <li class="nav-item">
-                    <a class="nav-link" href="inicio.html">Inicio</a>
+                    <a class="nav-link" href="inicio.php">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="practicas-seguras.html">Prácticas Seguras</a>
+                    <a class="nav-link" href="practicas-seguras.php">Prácticas Seguras</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="cascos.php">Tipos De Casco</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="">Contacto / Compromiso</a>
+                    <a class="nav-link" href="contacto-compromiso.php">Contacto / Compromiso</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="normativa-reglamento.html">Normativa y Reglamento</a>
+                    <a class="nav-link active" aria-current="page" href="">Normativa y Reglamento</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="accidentes.php">Accidentes Viales</a>
@@ -47,28 +47,49 @@
         </nav>
         <div>
             <div class="recuadro-page d-flex justify-content-center">
-                <h2 class="text">COMPROMISO DE CONDUCCIÓN SEGURA</h2>
+                <h2 class="text">NORMATIVA Y REGLAMENTO</h2>
             </div>
             <section class="d-flex flex-column justify-content-center">
                 <!--Contenido-->
-                <ul>
-                    <li class="text"><h5>No usar el teléfono mientras conduce</li></h5>
-                    <li class="text"><h5>respetar los límites de velovidad</li></h5>
-                    <li class="text"><h5>mantener el vehículo en condiciones seguras</li></h5>
-                    <li class="text"><h5>cumplir las normas de tránsito</li></h5>
-                    <li class="text"><h5>confirmar que a leído y hacepta las responsabilidades</li></h5>
-                </ul>
-                <br>
+                <h2 class="text">Obligaciones de los Conductores</h2>
                 <h5 class="text">
-                    En esta sección se muestra un documento breve donde el usuario declara comprometerse a cumplir con las normas de conducción segura.
-                    El usuario debe marcar una casilla de aceptación (“Acepto el compromiso”) para continuar.
-                    El compromiso incluye lineamientos como evitar distracciones al volante,
-                    respetar las señales de tránsito y operar el vehículo de forma responsable.
+                    Respetar la preferencia de paso de peatones y ciclistas, especialmente en cruces y semáforos.
+                    Disminuir la velocidad ante transporte escolar detenido o en zonas escolares.
+                    Portar la documentación reglamentaria (licencia/permiso, tarjeta de circulación, placas).
+                    Contar con equipos de seguridad (cinturones, claxon, luces).
                 </h5>
                 <br>
-                <div class="recuadro-page d-flex justify-content-center">
-                    <h2 class="text">CONTACTO</h2>
-                </div>
+
+                <h2 class="text">Prohibiciones Comunes</h2>
+                <h5 class="text">
+                    No usar el celular al conducir, exceder los límites de velocidad, invadir carriles exclusivos, 
+                    circular en sentido contrario, remolcar vehículos sin grúa (salvo excepciones).
+                </h5>
+                <br>
+
+                <h2 class="text">Jerarquía de la Movilidad</h2> 
+                <h5 class="text">
+                    La ley prioriza a los usuarios más vulnerables:
+                    Peatones (incluyendo personas con discapacidad y menores de edad).
+                    Usuarios de vehículos no motorizados (bicicletas).
+                    Usuarios y prestadores de transporte público.
+                    Usuarios de transporte particular (automóviles, motocicletas).
+                </h5>
+                <br>
+
+                <h2 class="text">Obligaciones de los Peatones</h2>
+                <h5 class="text">
+                    Circular por las aceras.
+                    Cruzar por las esquinas, pasos peatonales o puentes.
+                    No cruzar entre vehículos o invadir la superficie de rodamiento intempestivamente.
+                </h5>
+                <br>
+
+                <h2 class="text">Señalamiento Vial</h2>
+                <h5 class="text">
+                    Conductores y peatones deben obedecer las indicaciones de las señales 
+                    (preventivas, restrictivas, informativas) y las marcas en el pavimento.
+                </h5>
             </section>
         </div>
         <footer class="footer p">
