@@ -31,7 +31,7 @@ $resultado = $conexion->query($sql);
             </section>
         </header>
         <nav class="navvv p">
-            <ul class="nav nav-pills justify-content-end">
+            <ul class="nav nav-pills justify-content-end" id="menu-navegacion">
                 <li class="nav-item">
                     <a class="nav-link" href="inicio.html">Inicio</a>
                 </li>
@@ -127,4 +127,5 @@ $resultado = $conexion->query($sql);
     </div>
     <script src="js/bootstrap.bundle.min.js"></script>
 </body>
+<script src="js/script.js"></script>
 </html>
