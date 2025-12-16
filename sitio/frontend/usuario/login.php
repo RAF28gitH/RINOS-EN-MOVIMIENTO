@@ -111,7 +111,7 @@
                         <div class="text-center mt-3">
                             <a href="registro.php" class="text-decoration-none">¿No tienes cuenta? Regístrate aquí</a>
                             <br><br>
-                            <a href="../inicio.html" class="btn btn-secondary btn-sm">Volver a Inicio</a>
+                            <a href="../inicio.php" class="btn btn-secondary btn-sm">Volver a Inicio</a>
                         </div>
                     </form>
                 </div>
