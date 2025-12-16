@@ -66,6 +66,7 @@
                     respetar las señales de tránsito y operar el vehículo de forma responsable.
                 </h5>
                 <br>
+                <p> puedes dejar tus comentarios y preguntas en el diguiente formulario: https://docs.google.com/forms/d/e/1FAIpQLSe1X3xzLaKtILIxvTgG8RV7WasRslwfLgHcse9ckObXPrxI4Q/viewform?usp=dialog</p>
                 <div class="recuadro-page d-flex justify-content-center">
                     <h2 class="text">CONTACTO</h2>
                 </div>
