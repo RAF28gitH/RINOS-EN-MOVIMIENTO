@@ -27,86 +27,122 @@ if ($filtro != "") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preguntas Frecuentes - Seguridad Vial</title>
-    <link rel="stylesheet" href="css/faq.css">
-</head>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css"> </head>
 
 <body>
 
-    <nav class="navbar">
-        <div class="logo-container">
-            <img src="https://cbtis217.edu.mx/recursos/img/logo.png" alt="Logo CBTis 217">
-        </div>
-        <ul class="nav-links">
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Prácticas Seguras</a></li>
-            <li><a href="#">Tipos de Cascos</a></li>
-            <li><a href="#">Normativa Vial</a></li>
-            <li><a href="#">Accidentes Moto</a></li>
-            <li><a href="#" class="active">FAQ</a></li>
-            <li><a href="#">Contacto</a></li>
-            <li class="auth-item"><a href="#" class="login-btn">Login</a></li>
-            <li class="auth-item"><a href="#" class="register-btn">Registro</a></li>
-        </ul>
-    </nav>
+    <div class="principal d-flex flex-column">
+        
+        <header class="header d-flex flex-row justify-content-between">
+            <section>
+                <h1 class="text">Preguntas Frecuentes</h1>
+            </section>
+            <section>
+                <img src="https://cbtis217.edu.mx/recursos/img/logo.png" alt="Logo CBTis 217" style="max-height: 80px;">
+            </section>
+        </header>
 
-    <main class="faq-container">
-        <h1>Preguntas Frecuentes (FAQ)</h1>
-        <p class="faq-intro">Respuestas a las dudas más comunes, cargadas directamente desde nuestra base de datos.</p>
+        <nav class="navvv p">
+            <ul class="nav nav-pills justify-content-end">
+                <li class="nav-item"><a class="nav-link" href="inicio.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="practicas-seguras.html">Prácticas Seguras</a></li>
+                <li class="nav-item"><a class="nav-link" href="tipos-cascos.html">Tipos De Casco</a></li>
+                <li class="nav-item"><a class="nav-link" href="normativa.html">Normativa Vial</a></li>
+                <li class="nav-item"><a class="nav-link" href="accidentes.html">Accidentes Viales</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="faq.php">Preguntas frecuentes</a></li>
+                <li class="nav-item"><a class="nav-link" href="contacto.php">Contacto</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+            </ul>
+        </nav>
 
-        <div class="filter-container">
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
-                <label for="cat">Filtrar por tema:</label>
-                <select name="cat" id="cat" onchange="this.form.submit()">
-                    <option value="">Todas las categorías</option>
+        <div>
+            <div class="recuadro-page d-flex justify-content-center">
+                <h2 class="text">DUDAS COMUNES</h2>
+            </div>
+            
+            <section class="d-flex justify-content-center flex-column align-items-center">
+                
+                <div class="container my-4 faq-info" style="padding: 1rem; border-radius: 20px; background-color: rgba(255, 255, 255, 0.1);">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET" class="d-flex align-items-center justify-content-center">
+                        <label for="cat" class="text me-3"><strong>Filtrar por tema:</strong></label>
+                        <select name="cat" id="cat" onchange="this.form.submit()" class="form-select w-auto">
+                            <option value="">Todas las categorías</option>
+                            <?php
+                            if ($resCategorias->num_rows > 0) {
+                                $resCategorias->data_seek(0); // Reiniciar puntero si es necesario
+                                while ($catRow = $resCategorias->fetch_assoc()) {
+                                    $nombreCat = $catRow['categoria'];
+                                    $selected = ($filtro == $nombreCat) ? 'selected' : '';
+                                    echo "<option value='$nombreCat' $selected>$nombreCat</option>";
+                                }
+                            }
+                            ?>
+                        </select>
+                    </form>
+                </div>
 
-                    <?php
-                    // Llenar el combobox con las categorías de la BD
-                    if ($resCategorias->num_rows > 0) {
-                        while ($catRow = $resCategorias->fetch_assoc()) {
-                            $nombreCat = $catRow['categoria'];
-                            // Si la categoría actual es igual a la que está en la URL, se deja seleccionada
-                            $selected = ($filtro == $nombreCat) ? 'selected' : '';
-                            echo "<option value='$nombreCat' $selected>$nombreCat</option>";
-                        }
-                    }
-                    ?>
-                </select>
-            </form>
-        </div>
-        <?php
-        if ($resultado->num_rows > 0) {
-            while ($fila = $resultado->fetch_assoc()) {
-                $preguntaSegura = htmlspecialchars($fila['pregunta']);
-                $respuestaSegura = nl2br(htmlspecialchars($fila['respuesta']));
-                $categoriaSegura = htmlspecialchars($fila['categoria']);
-        ?>
-                <details class="faq-item">
-                    <summary>
-                        <?php if (!empty($categoriaSegura)): ?>
-                            <span class="cat-badge"><?php echo $categoriaSegura; ?></span>
-                        <?php endif; ?>
+                
+                    
+                    <div class="mx-auto faq-info"> 
+                        
+                        <div class="borde-accordion">
+                            <div class="accordion accordion-flush" id="accordionFaq">
+                                
+                                <?php
+                                if ($resultado->num_rows > 0) {
+                                    while ($fila = $resultado->fetch_assoc()) {
+                                        $idPregunta = $fila['id'];
+                                        $preguntaSegura = htmlspecialchars($fila['pregunta']);
+                                        $respuestaSegura = nl2br(htmlspecialchars($fila['respuesta']));
+                                        $categoriaSegura = htmlspecialchars($fila['categoria']);
+                                ?>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading<?php echo $idPregunta; ?>">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $idPregunta; ?>" aria-expanded="false" aria-controls="collapse<?php echo $idPregunta; ?>">
+                                                <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center w-100">
+                                                    <?php if (!empty($categoriaSegura)): ?>
+                                                        <span class="badge bg-warning text-dark me-2 mb-1 mb-md-0"><?php echo $categoriaSegura; ?></span>
+                                                    <?php endif; ?>
+                                                    <strong class="text"><?php echo $preguntaSegura; ?></strong>
+                                                </div>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse<?php echo $idPregunta; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $idPregunta; ?>" data-bs-parent="#accordionFaq">
+                                            <div class="accordion-body text" style="text-align: justify;">
+                                                <?php echo $respuestaSegura; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+                                    }
+                                } else {
+                                    echo "<div class='p-4 text-center text'><p>No se encontraron preguntas en esta categoría.</p>";
+                                    if ($filtro != "") {
+                                        echo "<a href='faq.php' class='btn btn-light btn-sm'>Ver todas</a></div>";
+                                    }
+                                }
+                                ?>
 
-                        <?php echo $preguntaSegura; ?>
-                    </summary>
-                    <div class="faq-answer">
-                        <p><?php echo $respuestaSegura; ?></p>
+                            </div>
+                        </div>
                     </div>
-                </details>
-        <?php
-            }
-        } else {
-            echo "<p style='text-align:center; margin-top:20px;'>No se encontraron preguntas en esta categoría.</p>";
-            // Botón para limpiar filtro si no hay resultados
-            if ($filtro != "") {
-                echo "<p style='text-align:center'><a href='index.php'>Ver todas las preguntas</a></p>";
-            }
-        }
+                
 
-        $conn->close();
-        ?>
+            </section>
+        </div>
 
-    </main>
+        <footer class="footer p mt-auto">
+            <h4 class="text">Página de CBTis217</h4>
+            <p class="text">Derechos reservados &copy; <?php echo date("Y"); ?></p>
+        </footer>
 
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
+<?php
+$conn->close();
+?>
