@@ -56,63 +56,6 @@ if ($is_admin && isset($_POST['action'])) {
     <title>Dashboard - CBTis217</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
-    <style>
-        .dashboard-container {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .welcome-message {
-            background: linear-gradient(135deg, #4a6fa5, #2c4d7c);
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .btn-logout {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 10px 30px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        .btn-logout:hover {
-            background-color: #c82333;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
-        }
-        .table-container {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            margin-top: 30px;
-        }
-        .role-badge {
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8em;
-            font-weight: bold;
-        }
-        .role-admin {
-            background-color: #dc3545;
-            color: white;
-        }
-        .role-user {
-            background-color: #28a745;
-            color: white;
-        }
-        .user-info-card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            margin-top: 20px;
-        }
-    </style>
 </head>
 <body>
     <div class="principal d-flex flex-column">
@@ -122,7 +65,7 @@ if ($is_admin && isset($_POST['action'])) {
                 <small class="text-white">Rol: <?php echo htmlspecialchars($_SESSION['rol']); ?></small>
             </section>
             <section>
-                <img src="img/logo.png" alt="CBTis217">
+                <img src="../img/logo.png" alt="CBTis217">
             </section>
         </header>
         
@@ -154,7 +97,41 @@ if ($is_admin && isset($_POST['action'])) {
             </div>
             
             <?php if ($is_admin): ?>
-            <!-- Panel de Administración -->
+            
+            <div class="container mb-5 mt-4">
+                <h3 class="mb-3 border-bottom pb-2">⚙️ Gestión de Contenido</h3>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="card h-100 border-warning shadow-sm">
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-warning">🚑 Accidentes</h5>
+                                <p class="card-text small text-muted">Administrar registros de accidentes viales.</p>
+                                <a href="../../backend/crud_accidentes.php" class="btn btn-outline-warning w-100 fw-bold">Ir a Accidentes</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card h-100 border-info shadow-sm">
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-info">🪖 Tipos de Cascos</h5>
+                                <p class="card-text small text-muted">Gestionar el catálogo de cascos y seguridad.</p>
+                                <a href="../../backend/crud_cascos.php" class="btn btn-outline-info w-100 fw-bold">Ir a Cascos</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card h-100 border-success shadow-sm">
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-success">❓ Preguntas Frecuentes</h5>
+                                <p class="card-text small text-muted">Editar las preguntas y respuestas del sitio.</p>
+                                <a href="../../backend/crud_faq.php" class="btn btn-outline-success w-100 fw-bold">Ir a FAQ</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="table-container">
                 <h3>Gestión de Usuarios</h3>
                 <div class="table-responsive">
@@ -258,6 +235,9 @@ if ($is_admin && isset($_POST['action'])) {
             <?php endif; ?>
             
             <div class="text-center mt-5">
+                <a href="../inicio.html" class="btn btn-primary me-3" style="padding: 10px 30px; font-weight: 600;">
+                    🏠 Volver al Sitio
+                </a>
                 <form method="POST" action="logout.php" class="d-inline">
                     <button type="submit" class="btn-logout">Cerrar Sesión</button>
                 </form>

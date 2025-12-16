@@ -55,17 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Registrarse</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
-    <style>
-        .registration-container {
-            max-width: 500px;
-            width: 100%;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            margin: 30px 0;
-        }
-    </style>
 </head>
 <body>
     <div class="principal d-flex flex-column">
@@ -74,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h1 class="text">Registrarse</h1>
             </section>
             <section>
-                <img src="img/logo.png" alt="CBTis217">
+                <img src="../img/logo.png" alt="CBTis217">
             </section>
         </header>
         <div>
@@ -126,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Registrarse</button>
-                            <a href="loging.php" class="btn btn-secondary">¿Ya tienes cuenta? Inicia Sesión</a>
+                            <a href="login.php" class="btn btn-secondary">¿Ya tienes cuenta? Inicia Sesión</a>
                         </div>
                     </form>
                 </div>
