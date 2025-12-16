@@ -68,8 +68,8 @@
                 <br>
                 <div class="recuadro-page d-flex justify-content-center">
                     <h2 class="text">CONTACTO</h2>
-                    <p class="text"> puedes dejar tus comentarios y preguntas en el diguiente formulario: https://docs.google.com/forms/d/e/1FAIpQLSe1X3xzLaKtILIxvTgG8RV7WasRslwfLgHcse9ckObXPrxI4Q/viewform?usp=dialog</p>
                 </div>
+                <p class="text"> puedes dejar tus comentarios y preguntas en el diguiente formulario: https://docs.google.com/forms/d/e/1FAIpQLSe1X3xzLaKtILIxvTgG8RV7WasRslwfLgHcse9ckObXPrxI4Q/viewform?usp=dialog</p>
             </section>
         </div>
         <footer class="footer p">
