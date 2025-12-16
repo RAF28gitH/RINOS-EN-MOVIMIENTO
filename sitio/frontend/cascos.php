@@ -1,37 +1,101 @@
 <?php
+// Usar la misma conexión PDO que usas en accidentes
+require_once 'usuario/configdatabase.php';
 
-$conexion = new mysqli("localhost", "root", "", "motos");
-
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
+try {
+    $stmt = $pdo->query("SELECT * FROM cascos ORDER BY Fecha_registro DESC");
+    $cascos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $error = "Error al cargar los cascos. Por favor intente más tarde.";
+    $cascos = [];
 }
-
-$sql = "SELECT * FROM cascos";
-
-$resultado = $conexion->query($sql);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tipos De Cascos</title>
+    <title>Tipos De Cascos - Seguridad Vial</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .principal {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .recuadro-page {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .tabla-motos {
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            margin: 30px 0;
+        }
+        .tabla-motos th {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .tabla-motos td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #dee2e6;
+            vertical-align: middle;
+        }
+        .tabla-motos tr:hover {
+            background-color: #f8f9fa;
+        }
+        .badge-gravedad {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        .badge-leve { background-color: #28a745; color: white; }
+        .badge-moderado { background-color: #ffc107; color: #212529; }
+        .badge-grave { background-color: #fd7e14; color: white; }
+        .badge-fatal { background-color: #dc3545; color: white; }
+        .info-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid #dc3545;
+        }
+        .stats-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 <body>
     <div class="principal d-flex flex-column">
         <header class="header d-flex flex-row justify-content-between">
             <section>
-                <h1 class="text">Tipos De Cascos</h1>
+                <h1 class="text">Cascos</h1>
             </section>
             <section>
                 <img src="img/logo.png" alt="CBTis217">
             </section>
         </header>
         <nav class="navvv p">
-            <ul class="nav nav-pills justify-content-end">
+            <ul class="nav nav-pills justify-content-end" id="menu-navegacion">
                 <li class="nav-item">
                     <a class="nav-link" href="inicio.html">Inicio</a>
                 </li>
@@ -58,85 +122,142 @@ $resultado = $conexion->query($sql);
                 </li>
             </ul>
         </nav>
-        <div>
-            <div class="recuadro-page d-flex justify-content-center">
-                <h2 class="text">CASCOS</h2>
+        
+        <main>
+            <div class="recuadro-page d-flex justify-content-center align-items-center py-4">
+                <h2 class="mb-0">🛡️ CASCOS DE PROTECCIÓN</h2>
             </div>
-            <section class="d-flex justify-content-center">
+            
+            <section class="d-flex justify-content-center py-4">
                 <div class="container my-4 cascos-info">
-                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                        
-                        <?php
-                        if ($resultado->num_rows > 0) {
-                            while($fila = $resultado->fetch_assoc()) {
-                        ?>
-                            <div class="col">
-                                <div class="card h-100 p shadow-sm">
-                                    
-                                    <?php if($fila['Imagen']): ?>
-                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($fila['Imagen']); ?>" class="card-img-top" alt="Casco" style="height: 250px; object-fit: cover;">
-                                    <?php else: ?>
-                                        <img src="img/logo.png" class="card-img-top p-5" alt="Sin imagen" style="height: 250px; object-fit: contain;">
-                                    <?php endif; ?>
-
-                                    <div class="card-body d-flex flex-column">
-                                        <h3 class="text card-title text-center">
-                                            <?php echo $fila['Marca'] . " " . $fila['Modelo']; ?>
-                                        </h3>
+                    <?php if (isset($error)): ?>
+                        <div class="alert alert-danger text-center"><?php echo $error; ?></div>
+                    <?php endif; ?>
+                    
+                    <?php if (empty($cascos)): ?>
+                        <div class="alert alert-info text-center py-5">
+                            <h4>📭 No hay cascos registrados</h4>
+                            <p class="mb-0">Actualmente no hay información disponible sobre cascos.</p>
+                        </div>
+                    <?php else: ?>
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                            <?php foreach ($cascos as $casco): ?>
+                                <?php
+                                // Manejar la imagen (puede venir como base64 o como ruta)
+                                $imagen_src = '';
+                                if (!empty($casco['Imagen'])) {
+                                    // Verificar si es base64
+                                    if (strpos($casco['Imagen'], 'data:image') === 0 || 
+                                        preg_match('/^[a-zA-Z0-9\/+]+={0,2}$/', $casco['Imagen'])) {
+                                        // Es base64
+                                        $imagen_src = "data:image/jpeg;base64," . $casco['Imagen'];
+                                    } else {
+                                        // Es una ruta de archivo
+                                        $imagen_src = htmlspecialchars($casco['Imagen']);
+                                        // Si es una ruta relativa, asegurarse de que sea accesible
+                                        if (!file_exists($imagen_src) && !filter_var($imagen_src, FILTER_VALIDATE_URL)) {
+                                            $imagen_src = "img/default-helmet.png";
+                                        }
+                                    }
+                                } else {
+                                    $imagen_src = "img/default-helmet.png";
+                                }
+                                ?>
+                                
+                                <div class="col">
+                                    <div class="card h-100 p-3 shadow-sm">
+                                        <img src="<?php echo $imagen_src; ?>" 
+                                             class="card-img-top" 
+                                             alt="Casco <?php echo htmlspecialchars($casco['Marca'] . ' ' . $casco['Modelo']); ?>"
+                                             onerror="this.src='img/default-helmet.png'">
                                         
-                                        <div class="text-center mb-3">
-                                            <span class="badge bg-primary"><?php echo $fila['Tipo']; ?></span>
-                                            <span class="badge bg-warning text-dark"><?php echo $fila['Certificacion']; ?></span>
-                                        </div>
+                                        <div class="card-body d-flex flex-column">
+                                            <h3 class="card-title text-center mb-3">
+                                                <?php echo htmlspecialchars($casco['Marca'] . ' ' . $casco['Modelo']); ?>
+                                            </h3>
+                                            
+                                            <div class="text-center mb-3">
+                                                <span class="badge bg-primary"><?php echo htmlspecialchars($casco['Tipo']); ?></span>
+                                                <span class="badge bg-warning text-dark"><?php echo htmlspecialchars($casco['Certificacion']); ?></span>
+                                            </div>
 
-                                        <p class="card-text text" style="text-align: justify;">
-                                            <?php echo $fila['Descripcion']; ?>
-                                        </p>
-                                        
-                                        <div class="mt-auto pt-3 text-center border-top">
-                                            <strong class="text fs-4">$<?php echo $fila['Precio_aprox']; ?></strong>
+                                            <p class="card-text" style="text-align: justify;">
+                                                <?php echo htmlspecialchars($casco['Descripcion']); ?>
+                                            </p>
+                                            
+                                            <div class="mt-auto pt-3 text-center border-top">
+                                                <strong class="price-tag">$<?php echo htmlspecialchars($casco['Precio_aprox']); ?> MXN</strong>
+                                                <br>
+                                                <small class="text-muted">Registrado: <?php echo date('d/m/Y', strtotime($casco['Fecha_registro'])); ?></small>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                </div>
-                        <?php
-                            }
-                        }
-                        else{
-                            echo "<h3 class='text-center w-100'>No hay cascos registrados aún.</h3>";
-                        }
-                        $conexion->close();
-                        ?>
-                    </div>
+                            <?php endforeach; ?>
+                        </div>
+                        
+                        <div class="mt-4 text-center">
+                            <div class="alert alert-info">
+                                <h5>💡 Importancia del Casco</h5>
+                                <p class="mb-0">
+                                    El uso correcto del casco reduce en un 40% el riesgo de muerte 
+                                    y en un 70% el riesgo de lesiones graves en accidentes de moto.
+                                </p>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </section>
-        </div>
+        </main>
+        
         <footer class="footer p">
             <h4 class="text">Página de CBTis217</h4>
             <div class="borde-accordion">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        <strong class="text">Integrantes</strong>
-                        </button>
-                    </h2>
-                    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body text">
-                            <ul>
-                                <li><strong>JUAN RAFAEL GONZÁLEZ DÍAZ</strong></li>
-                                <li><strong>DAVID ALMANZA LÓPEZ</strong></li>
-                                <li><strong>DANA CAMILA NIETO OROZCO</strong></li>
-                                <li><strong>MICHELLE ROMERO ÁVILA</strong></li>
-                                <li><strong>JOCELIN ROCHA GARNICA</strong></li>
-                            </ul>
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            <strong class="text">Integrantes</strong>
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body text">
+                                <ul>
+                                    <li><strong>JUAN RAFAEL GONZÁLEZ DÍAZ</strong></li>
+                                    <li><strong>DAVID ALMANZA LÓPEZ</strong></li>
+                                    <li><strong>DANA CAMILA NIETO OROZCO</strong></li>
+                                    <li><strong>MICHELLE ROMERO ÁVILA</strong></li>
+                                    <li><strong>JOCELIN ROCHA GARNICA</strong></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
         </footer>
     </div>
+    
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Actualizar año en el footer
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearElement = document.querySelector('footer small');
+            if (yearElement) {
+                yearElement.innerHTML = yearElement.innerHTML.replace('<?php echo date('Y'); ?>', new Date().getFullYear());
+            }
+            
+            // Mejorar experiencia de hover en móviles
+            const cards = document.querySelectorAll('.cascos-info .card');
+            cards.forEach(card => {
+                card.addEventListener('touchstart', function() {
+                    this.classList.add('hover');
+                });
+                card.addEventListener('touchend', function() {
+                    this.classList.remove('hover');
+                });
+            });
+        });
+    </script>
 </body>
+<script src="js/script.js"></script>
 </html>

@@ -1,8 +1,6 @@
 CREATE DATABASE datos;
 USE datos;
 
-DROP TABLE IF EXISTS usuarios;
-
 CREATE TABLE usuarios(
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(28) UNIQUE NOT NULL,

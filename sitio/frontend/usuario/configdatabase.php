@@ -1,7 +1,4 @@
 <?php
-/* configdatabase.php */
-
-// Credenciales de XAMPP por defecto
 $host = 'localhost';
 $dbname = 'Motos';  // El nombre exacto de tu base de datos
 $username = 'root'; // Usuario por defecto de XAMPP
