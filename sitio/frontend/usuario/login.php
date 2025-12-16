@@ -30,29 +30,30 @@
                     $error = '';
                     $success = '';
                     
-                    if (isset($_SESSION['error'])) {
+                    if (isset($_SESSION['error'])){
                         $error = $_SESSION['error'];
                         unset($_SESSION['error']);
                     }
                     
-                    if (isset($_SESSION['success'])) {
+                    if (isset($_SESSION['success'])){
                         $success = $_SESSION['success'];
                         unset($_SESSION['success']);
                     }
                     
-                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                         $username = $_POST['username'] ?? '';
                         $password = $_POST['password'] ?? '';
                         
-                        if (empty($username) || empty($password)) {
+                        if (empty($username) || empty($password)){
                             $error = "Por favor, completa todos los campos";
-                        } else {
-                            try {
+                        }
+                        else{
+                            try{
                                 $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE username = :username");
                                 $stmt->execute(['username' => $username]);
                                 $user = $stmt->fetch();
                                 
-                                if ($user && password_verify($password, $user['pass'])) {
+                                if ($user && password_verify($password, $user['pass'])){
                                     $_SESSION['user_id'] = $user['id'];
                                     $_SESSION['username'] = $user['username'];
                                     $_SESSION['rol'] = $user['rol'];
@@ -61,10 +62,11 @@
                                     
                                     header('Location: dashboard.php');
                                     exit();
-                                } else {
+                                }
+                                else{
                                     $error = "Usuario o contraseña incorrectos";
                                 }
-                            } catch(PDOException $e) {
+                            } catch(PDOException $e){
                                 $error = "Error al iniciar sesión: " . $e->getMessage();
                             }
                         }
