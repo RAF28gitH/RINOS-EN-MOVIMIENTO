@@ -14,7 +14,7 @@
                 <h1 class="text">Iniciar Sesión</h1>
             </section>
             <section>
-                <img src="img/logo.png" alt="CBTis217">
+                <img src="../img/logo.png" alt="CBTis217">
             </section>
         </header>
         <div>
@@ -104,11 +104,12 @@
                             <label class="form-check-label" for="remember">Recordarme</label>
                         </div>
                         
-                        <button type="submit" class="btn btn-login">Iniciar Sesión</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Iniciar Sesión</button>
                         
                         <div class="text-center mt-3">
-                            <a href="registro.php" class="text-decoration-none">¿No tienes cuenta? Regístrate aquí</a><br>
-                            <a href="#" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
+                            <a href="registro.php" class="text-decoration-none">¿No tienes cuenta? Regístrate aquí</a>
+                            <br><br>
+                            <a href="../inicio.html" class="btn btn-secondary btn-sm">Volver a Inicio</a>
                         </div>
                     </form>
                 </div>
