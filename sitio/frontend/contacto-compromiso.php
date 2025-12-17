@@ -69,7 +69,16 @@
                 <div class="recuadro-page d-flex justify-content-center">
                     <h2 class="text">CONTACTO</h2>
                 </div>
-                <p class="text"> puedes dejar tus comentarios y preguntas en el diguiente formulario: https://docs.google.com/forms/d/e/1FAIpQLSe1X3xzLaKtILIxvTgG8RV7WasRslwfLgHcse9ckObXPrxI4Q/viewform?usp=dialog</p>
+                <h5 class="text"> puedes dejar tus comentarios y preguntas en el diguiente formulario:</h5>
+                <div id="botoncito">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSe1X3xzLaKtILIxvTgG8RV7WasRslwfLgHcse9ckObXPrxI4Q/viewform?usp=dialog" 
+                        class="btn btn-primary" 
+                        target="_blank" 
+                        role="button">
+                        Ir al Formulario
+                    </a>
+                </div>
+
             </section>
         </div>
         <footer class="footer p">
