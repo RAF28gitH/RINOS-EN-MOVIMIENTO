@@ -45,14 +45,14 @@ if ($filtro != "") {
 
         <nav class="navvv p">
             <ul class="nav nav-pills justify-content-end">
-                <li class="nav-item"><a class="nav-link" href="inicio.html">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="practicas-seguras.html">Prácticas Seguras</a></li>
-                <li class="nav-item"><a class="nav-link" href="tipos-cascos.html">Tipos De Casco</a></li>
-                <li class="nav-item"><a class="nav-link" href="normativa.html">Normativa Vial</a></li>
-                <li class="nav-item"><a class="nav-link" href="accidentes.html">Accidentes Viales</a></li>
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="faq.php">Preguntas frecuentes</a></li>
+                <li class="nav-item"><a class="nav-link" href="inicio.php">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="practicas-seguras.php">Prácticas Seguras</a></li>
+                <li class="nav-item"><a class="nav-link" href="cascos.php">Tipos De Casco</a></li>
+                <li class="nav-item"><a class="nav-link" href="normativa-reglamento.php">Normativa Vial</a></li>
+                <li class="nav-item"><a class="nav-link" href="accidentes.php">Accidentes Viales</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="FAQ.php">Preguntas frecuentes</a></li>
                 <li class="nav-item"><a class="nav-link" href="contacto.php">Contacto</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
             </ul>
         </nav>
 
