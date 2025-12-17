@@ -142,31 +142,9 @@ catch(PDOException $e){
                     <?php else: ?>
                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                             <?php foreach($cascos as $casco): ?>
-                                <?php
-                                $imagen_src = '';
-                                if(!empty($casco['Imagen'])){
-                                    if(strpos($casco['Imagen'], 'data:image') === 0 || 
-                                        preg_match('/^[a-zA-Z0-9\/+]+={0,2}$/', $casco['Imagen'])){
-                                        $imagen_src = "data:image/jpeg;base64," . $casco['Imagen'];
-                                    }
-                                    else{
-                                        $imagen_src = htmlspecialchars($casco['Imagen']);
-                                        if(!file_exists($imagen_src) && !filter_var($imagen_src, FILTER_VALIDATE_URL)){
-                                            $imagen_src = "img/default-helmet.png";
-                                        }
-                                    }
-                                }
-                                else{
-                                    $imagen_src = "img/default-helmet.png";
-                                }
-                                ?>
                                 
                                 <div class="col">
                                     <div class="card h-100 p-3 shadow-sm">
-                                        <img src="<?php echo $imagen_src; ?>" 
-                                             class="card-img-top" 
-                                             alt="Casco <?php echo htmlspecialchars($casco['Marca'] . ' ' . $casco['Modelo']); ?>"
-                                             onerror="this.src='img/default-helmet.png'">
                                         
                                         <div class="card-body d-flex flex-column">
                                             <h3 class="card-title text-center mb-3">
